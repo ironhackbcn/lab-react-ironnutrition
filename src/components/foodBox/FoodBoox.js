@@ -24,7 +24,7 @@ class FoodBoox extends Component {
                 <input
                   className="input"
                   type="number" 
-                  value="1"
+                  value={this.props.quantity}
                 />
               </div>
               <div className="control">
