@@ -1,6 +1,11 @@
 import React, { Component } from 'react'
 
 class FoodBoox extends Component {
+
+  handleClick = () => {
+    this.props.referenceDailyFood(this.props.name);
+  };
+
   render() {
     return (
       <div>
@@ -28,7 +33,7 @@ class FoodBoox extends Component {
                 />
               </div>
               <div className="control">
-                <button className="button is-info">
+                <button onClick={this.handleClick} className="button is-info">
                   +
                 </button>
               </div>

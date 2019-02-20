@@ -6,11 +6,13 @@ import './App.css';
 import FoodBoox from './components/foodBox/FoodBoox.js';
 import Search from './components/searchbar/Search.js';
 import Form from './components/form/Form';
+import FoodList from './components/foodList/FoodList';
 
 class App extends Component {
 
   state = {
     foods: [...foods],
+    foodForTheDay: [],
   }
 
   defaultValue = 1;
@@ -21,8 +23,7 @@ class App extends Component {
       calories: calories,
       image: url,
     };
-
-    let foodsCopy = [...foods]
+    let foodsCopy = [...foods];
     foodsCopy.push(foodItem);
 
     this.setState({
@@ -33,25 +34,35 @@ class App extends Component {
   searchFood = (searchInput) => {
     let foodsCopy = [...foods];
     let filteredFood = foodsCopy.filter((food) => {
-      return food.name.toLowerCase().indexOf(searchInput) !== -1;
+      return food.name.toLowerCase().indexOf(searchInput.toLowerCase()) !== -1;
     });
 
     this.setState({
       foods: filteredFood,
     });
-    
-  }
+  };
+
+  addDailyFood = (name) => {
+    let CopyFoodForTheDay = [...this.state.foodForTheDay];
+    let selectedFood = [...this.state.foods].filter(food => food.name === name);
+    this.setState(
+      {foodForTheDay: CopyFoodForTheDay.concat(selectedFood)}
+      )
+  };
+
+
 
   listFood = () => {
     const { foods } = this.state;
-    return foods.map((foods, index) => {
+    return foods.map((food, index) => {
       return <FoodBoox
-        key = {`${foods.name}-${index}`}
-        index = {index}
-        name = {foods.name}
-        calories = {foods.calories}
-        image = {foods.image}
-        quantity = {this.defaultValue}
+        key={`${food.name}-${index}`}
+        index={index}
+        name={food.name}
+        calories={food.calories}
+        image={food.image}
+        quantity={this.defaultValue}
+        referenceDailyFood={this.addDailyFood}
         />
     });
   }
@@ -62,6 +73,7 @@ class App extends Component {
         <Search referenceSearchFood={this.searchFood} />
         <Form referenceAddFood={this.addFood} />
         {this.listFood()}
+        <FoodList foodForTheDay={this.state.foodForTheDay} />
       </div>
     );
   }
