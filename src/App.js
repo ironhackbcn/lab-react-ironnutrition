@@ -63,9 +63,24 @@ class App extends Component {
       this.setState({
         foodForTheDay: copyFoodForTheDay,
       });
-
     }
   };
+
+  deleteDailyFood = (name) => {
+    const copyFoodForTheDay = [...this.state.foodForTheDay];
+    const itemSelected = [...this.state.foodForTheDay].filter(food => food.name === name);
+    if (itemSelected[0].quantity > 1) {
+      copyFoodForTheDay.map(food => food.quantity -= 1);
+      this.setState(
+        {foodForTheDay: copyFoodForTheDay}
+      );
+    } else {
+      this.setState(
+        {foodForTheDay: [...this.state.foodForTheDay].filter(food => food.name !== name)}
+      );
+    }
+
+  }
 
   listFood = () => {
     let { foods, searchInput } = this.state;
@@ -90,10 +105,19 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Search referenceSearchFood={this.searchFood} />
-        <Form referenceAddFood={this.addFood} />
+        <Search
+          referenceSearchFood={this.searchFood}
+        />
+        <Form
+          referenceAddFood={this.addFood}
+        />
+
         {this.listFood()}
-        <FoodList foodForTheDay={this.state.foodForTheDay} />
+
+        <FoodList 
+          foodForTheDay={this.state.foodForTheDay}
+          referenceDeleteDailyFood={this.deleteDailyFood}
+        />
       </div>
     );
   }

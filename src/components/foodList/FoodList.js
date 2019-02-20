@@ -12,6 +12,7 @@ class FoodList extends Component {
         quantity={food.quantity}
         name={food.name}
         calories={food.calories}
+        referenceDeleteDailyFood={this.props.referenceDeleteDailyFood}
         />
     })
   }
