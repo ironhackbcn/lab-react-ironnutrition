@@ -6,8 +6,12 @@ class FoodBoox extends Component {
 
   handleClick = () => {
     if (this.state.quantity) {
-      return this.props.referenceDailyFood(this.props.name, parseInt(this.state.quantity));
-    }
+      this.props.referenceDailyFood(this.props.name, parseInt(this.state.quantity));
+      this.setState({
+        quantity: '',
+      });
+    };
+
   }
 
   handleChange = (e) => {
@@ -41,6 +45,7 @@ class FoodBoox extends Component {
                   type="number" 
                   onChange={this.handleChange}
                   name="quantity"
+                  value={this.state.quantity}
                 />
               </div>
               <div className="control">

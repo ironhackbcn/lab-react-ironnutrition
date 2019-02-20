@@ -14,8 +14,6 @@ class App extends Component {
     foodForTheDay: [],
   }
 
-  defaultValue = 1;
-
   addFood = (name, calories, url) => {
     let foodItem = {
       name: name,
