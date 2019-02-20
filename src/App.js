@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import 'bulma/css/bulma.css';
 import foods from './data/foods.json'
-// import logo from './logo.svg';
 import './App.css';
 import FoodBoox from './components/foodBox/FoodBoox.js';
 import Search from './components/searchbar/Search.js';
@@ -42,9 +41,10 @@ class App extends Component {
     });
   };
 
-  addDailyFood = (name) => {
+  addDailyFood = (name, quantity) => {
     let CopyFoodForTheDay = [...this.state.foodForTheDay];
     let selectedFood = [...this.state.foods].filter(food => food.name === name);
+    selectedFood[0].quantity = quantity;
     this.setState(
       {foodForTheDay: CopyFoodForTheDay.concat(selectedFood)}
       )

@@ -21,7 +21,7 @@ class FoodList extends Component {
     if (foodsForTheDay.length > 0){
       return foodsForTheDay
         .reduce((acc, curr) => {
-          return acc + curr.calories;
+          return acc + (curr.calories * curr.quantity);
         }, 0);
     }
     return 0;

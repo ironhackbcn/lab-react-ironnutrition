@@ -2,9 +2,19 @@ import React, { Component } from 'react'
 
 class FoodBoox extends Component {
 
+  state = {};
+
   handleClick = () => {
-    this.props.referenceDailyFood(this.props.name);
-  };
+    if (this.state.quantity) {
+      return this.props.referenceDailyFood(this.props.name, parseInt(this.state.quantity));
+    }
+  }
+
+  handleChange = (e) => {
+    this.setState({
+      [e.target.name]: e.target.value,
+    });
+  }
 
   render() {
     return (
@@ -29,7 +39,8 @@ class FoodBoox extends Component {
                 <input
                   className="input"
                   type="number" 
-                  value={this.props.quantity}
+                  onChange={this.handleChange}
+                  name="quantity"
                 />
               </div>
               <div className="control">
