@@ -11,6 +11,7 @@ class App extends Component {
 
   state = {
     foods: [...foods],
+    searchInput: '',
     foodForTheDay: [],
   }
 
@@ -20,7 +21,7 @@ class App extends Component {
       calories: calories,
       image: url,
     };
-    let foodsCopy = [...foods];
+    let foodsCopy = [...this.state.foods];
     foodsCopy.push(foodItem);
 
     this.setState({
@@ -29,13 +30,22 @@ class App extends Component {
   }
 
   searchFood = (searchInput) => {
-    let foodsCopy = [...foods];
-    let filteredFood = foodsCopy.filter((food) => {
-      return food.name.toLowerCase().indexOf(searchInput.toLowerCase()) !== -1;
+    let foodsCopy = [...this.state.foods];
+    let filteredFood = foodsCopy.map((food) => {
+      if (
+        food.name.toLowerCase().indexOf(searchInput.toLowerCase()) !== -1
+        && searchInput !== ''
+        ){
+        food.hidden = false;
+      } else {
+        food.hidden = true;
+      }
+      return food;
     });
 
     this.setState({
       foods: filteredFood,
+      searchInput: searchInput,
     });
   };
 
@@ -48,10 +58,14 @@ class App extends Component {
       )
   };
 
-
-
   listFood = () => {
-    const { foods } = this.state;
+    let { foods, searchInput } = this.state;
+
+    if (searchInput !== ''){
+      foods = foods.filter(food => food.hidden === false)
+      console.log(foods);
+    };
+
     return foods.map((food, index) => {
       return <FoodBoox
         key={`${food.name}-${index}`}
