@@ -1,25 +1,61 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import logo from "./logo.svg";
+import "./App.css";
+import foods from "./data/foods.json";
+import FoodBox from "./components/FoodBox";
+import AddForm from "./components/AddForm";
+import Search from "./components/Search";
+import "bulma/css/bulma.css";
 
 class App extends Component {
+  state = {
+    foods: foods,
+    isVisible: false
+  };
+
+  handleToggle = () => {
+    this.setState({
+      isVisible: !this.state.isVisible
+    });
+  };
+
+  handleClick = newItem => {
+    const { foods } = this.state;
+    const newFood = [...foods, newItem];
+    this.setState({
+      foods: newFood
+    });
+  };
+
+  searchHandler = (e) => {
+    
+    let foundFoods = [...foods].filter(function(item){
+      return item.name.toLowerCase().search(
+        e.toLowerCase()) !== -1;
+    });
+    this.setState({
+      foods: foundFoods
+    });
+  
+  }
+  
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        <h1>IRON NUTRITION</h1>
+        <Search search={this.searchHandler} />
+        <button onClick={this.handleToggle}>Add New Food</button>
+        {this.state.isVisible ? <AddForm addToList={this.handleClick} /> : null}
+        {this.state.foods.map((item, index) => {
+          return (
+            <FoodBox
+              key={index}
+              image={item.image}
+              name={item.name}
+              calories={item.calories}
+            />
+          );
+        })}
       </div>
     );
   }
