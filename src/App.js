@@ -30,6 +30,18 @@ class App extends Component {
     })
   }
 
+  searchFood = (searchInput) => {
+    let foodsCopy = [...foods];
+    let filteredFood = foodsCopy.filter((food) => {
+      return food.name.toLowerCase().indexOf(searchInput) !== -1;
+    });
+
+    this.setState({
+      foods: filteredFood,
+    });
+    
+  }
+
   listFood = () => {
     const { foods } = this.state;
     return foods.map((foods, index) => {
@@ -47,7 +59,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Search />
+        <Search referenceSearchFood={this.searchFood} />
         <Form referenceAddFood={this.addFood} />
         {this.listFood()}
       </div>

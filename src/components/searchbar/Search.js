@@ -6,14 +6,18 @@ class Search extends Component {
     searchInput: '',
   }
 
-  handleInput = () => {
+  handleSearchInput = (e) => {
+
+    const searchInput = e.target.value;
+
+    this.props.referenceSearchFood(searchInput);
 
   }
 
   render() {
     return (
       <div>
-        <input type="text" />
+        <input type="text" onChange={this.handleSearchInput} />
       </div>
     )
   }
