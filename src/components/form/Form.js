@@ -16,14 +16,13 @@ class Form extends Component {
     this.props.referenceAddFood(name, calories, url);
   }
 
-  handleChange = (e) => {
+  handleChange = (event) => {
     this.setState({
-      [e.target.name]: e.target.value,
+      [event.target.name]: event.target.value,
     });
   }
 
-  handleSubmit= (e) => {
-    e.preventDefault();
+  handleSubmit= () => {
     const { name, calories, url } = this.state;
     this.handleAddFood(name, calories, url);
     this.setState({

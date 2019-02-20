@@ -50,12 +50,21 @@ class App extends Component {
   };
 
   addDailyFood = (name, quantity) => {
-    let CopyFoodForTheDay = [...this.state.foodForTheDay];
+    let copyFoodForTheDay = [...this.state.foodForTheDay];
     let selectedFood = [...this.state.foods].filter(food => food.name === name);
     selectedFood[0].quantity = quantity;
-    this.setState(
-      {foodForTheDay: CopyFoodForTheDay.concat(selectedFood)}
-      )
+    if (copyFoodForTheDay.indexOf(selectedFood[0]) === -1){
+      this.setState(
+        {foodForTheDay: copyFoodForTheDay.concat(selectedFood)}
+        );
+    } else {
+      const itemIndex = copyFoodForTheDay.indexOf(selectedFood[0]);
+      copyFoodForTheDay[itemIndex].quantity += selectedFood[0].quantity;
+      this.setState({
+        foodForTheDay: copyFoodForTheDay,
+      });
+
+    }
   };
 
   listFood = () => {
@@ -63,7 +72,6 @@ class App extends Component {
 
     if (searchInput !== ''){
       foods = foods.filter(food => food.hidden === false)
-      console.log(foods);
     };
 
     return foods.map((food, index) => {

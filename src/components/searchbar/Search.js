@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 
 class Search extends Component {
 
-  handleSearchInput = (e) => {
-    const searchInput = e.target.value;
+  handleSearchInput = (event) => {
+    const searchInput = event.target.value;
     this.props.referenceSearchFood(searchInput);
   }
 
