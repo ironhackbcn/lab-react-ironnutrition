@@ -30,7 +30,7 @@ class FoodList extends Component {
 
   render() {
     return (
-      <div>
+      <div className="dailyFood">
         <h1 className="title">Today's foods</h1>
         <ul>
           {this.listFood()}
