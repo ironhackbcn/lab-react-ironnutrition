@@ -10,7 +10,7 @@ class ListRow extends Component {
 
   render() {
     return (
-      <li>
+      <li className="subtitle">
         <span>{this.props.quantity} </span>
         <span>{this.props.name} = </span>
         <span>{this.getCalories()} cal</span>

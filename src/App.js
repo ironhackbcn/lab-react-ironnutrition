@@ -69,8 +69,10 @@ class App extends Component {
   deleteDailyFood = (name) => {
     const copyFoodForTheDay = [...this.state.foodForTheDay];
     const itemSelected = [...this.state.foodForTheDay].filter(food => food.name === name);
+    const itemSelectedIndex = copyFoodForTheDay.map(function(food) {return food.name; }).indexOf(itemSelected[0].name);
     if (itemSelected[0].quantity > 1) {
-      copyFoodForTheDay.map(food => food.quantity -= 1);
+      itemSelected[0].quantity -= 1;
+      copyFoodForTheDay.splice(itemSelectedIndex, 1, itemSelected[0]);
       this.setState(
         {foodForTheDay: copyFoodForTheDay}
       );

@@ -11,7 +11,15 @@ class FoodBoox extends Component {
         quantity: '',
       });
     };
+  }
 
+  handlePress = (e) => {
+    if (e.charCode === 13) {
+      this.props.referenceDailyFood(this.props.name, parseInt(this.state.quantity));
+      this.setState({
+        quantity: '',
+      });
+    };
   }
 
   handleChange = (e) => {
@@ -46,6 +54,8 @@ class FoodBoox extends Component {
                   onChange={this.handleChange}
                   name="quantity"
                   value={this.state.quantity}
+                  placeholder="quantity"
+                  onKeyPress={this.handlePress}
                 />
               </div>
               <div className="control">

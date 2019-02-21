@@ -35,7 +35,7 @@ class FoodList extends Component {
         <ul>
           {this.listFood()}
         </ul>
-        <p className="subtitle">Total: <span>{this.getTotalCalories()}</span> cal</p>
+        <p className="title is-4">Total: <span>{this.getTotalCalories()}</span> cal</p>
       </div>
     )
   }
