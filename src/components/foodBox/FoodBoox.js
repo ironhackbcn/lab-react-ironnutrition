@@ -14,12 +14,14 @@ class FoodBoox extends Component {
   }
 
   handlePress = (e) => {
-    if (e.charCode === 13) {
-      this.props.referenceDailyFood(this.props.name, parseInt(this.state.quantity));
-      this.setState({
-        quantity: '',
-      });
-    };
+    if(this.state.quantity) {
+      if (e.charCode === 13) {
+        this.props.referenceDailyFood(this.props.name, parseInt(this.state.quantity));
+        this.setState({
+          quantity: '',
+        });
+      };
+    }
   }
 
   handleChange = (e) => {
