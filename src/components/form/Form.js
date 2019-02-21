@@ -39,10 +39,10 @@ class Form extends Component {
 
         {(this.state.clicked ?
           <div className="dropdown">
-            <input className="input" type="text" onChange={this.handleChange} name="name" placeholder="Name" value={this.state.name} />
-            <input className="input" type="text" onChange={this.handleChange} name="calories" placeholder="Calories" value={this.state.calories} />
-            <input className="input" type="text" onChange={this.handleChange} name="url" placeholder="ImageURL" value={this.state.url} />
-            <button className="button is-info" onClick={this.handleSubmit}>Add new Food</button>
+            <input className="input dropdown-elm" type="text" onChange={this.handleChange} name="name" placeholder="Name" value={this.state.name} />
+            <input className="input dropdown-elm" type="text" onChange={this.handleChange} name="calories" placeholder="Calories" value={this.state.calories} />
+            <input className="input dropdown-elm" type="text" onChange={this.handleChange} name="url" placeholder="ImageURL" value={this.state.url} />
+            <button className="button is-info dropdown-elm" onClick={this.handleSubmit}>Add new Food</button>
           </div>
           : null)}
       </div>

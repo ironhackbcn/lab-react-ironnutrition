@@ -119,7 +119,7 @@ class App extends Component {
             />
         </div>
         <div className="columns">
-          <div className="column is-half">
+          <div className="column is-three-fifths">
             {this.listFood()}
           </div>
           <div className="column">
