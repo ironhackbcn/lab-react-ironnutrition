@@ -9,9 +9,7 @@ class Search extends Component {
 
   render() {
     return (
-      <div>
-        <input type="text" onChange={this.handleSearchInput} />
-      </div>
+        <input className="input is-info" type="text" onChange={this.handleSearchInput} />
     )
   }
 }

@@ -31,11 +31,11 @@ class FoodList extends Component {
   render() {
     return (
       <div>
-        <h1>Today's foods</h1>
+        <h1 className="title">Today's foods</h1>
         <ul>
           {this.listFood()}
         </ul>
-        <p>Total: <span>{this.getTotalCalories()}</span> cal</p>
+        <p className="subtitle">Total: <span>{this.getTotalCalories()}</span> cal</p>
       </div>
     )
   }

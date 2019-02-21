@@ -35,14 +35,14 @@ class Form extends Component {
   render() {
     return (
       <div>
-        <button onClick={this.handleClick}>Add Food</button>
+        <button onClick={this.handleClick} className="button is-info">+</button>
 
         {(this.state.clicked ?
-          <div>
-            <input type="text" onChange={this.handleChange} name="name" placeholder="Name" value={this.state.name} />
-            <input type="text" onChange={this.handleChange} name="calories" placeholder="Calories" value={this.state.calories} />
-            <input type="text" onChange={this.handleChange} name="url" placeholder="ImageURL" value={this.state.url} />
-            <button onClick={this.handleSubmit}>Add new Food</button>
+          <div className="dropdown">
+            <input className="input" type="text" onChange={this.handleChange} name="name" placeholder="Name" value={this.state.name} />
+            <input className="input" type="text" onChange={this.handleChange} name="calories" placeholder="Calories" value={this.state.calories} />
+            <input className="input" type="text" onChange={this.handleChange} name="url" placeholder="ImageURL" value={this.state.url} />
+            <button className="button is-info" onClick={this.handleSubmit}>Add new Food</button>
           </div>
           : null)}
       </div>

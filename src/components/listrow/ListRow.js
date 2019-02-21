@@ -14,7 +14,7 @@ class ListRow extends Component {
         <span>{this.props.quantity} </span>
         <span>{this.props.name} = </span>
         <span>{this.getCalories()} cal</span>
-        <button onClick={this.handleDelete}>delete</button>
+        <button onClick={this.handleDelete} className="delete"></button>
       </li>
     )
   }

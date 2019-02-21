@@ -104,20 +104,29 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        <Search
-          referenceSearchFood={this.searchFood}
-        />
-        <Form
-          referenceAddFood={this.addFood}
-        />
-
-        {this.listFood()}
-
-        <FoodList 
-          foodForTheDay={this.state.foodForTheDay}
-          referenceDeleteDailyFood={this.deleteDailyFood}
-        />
+      <div className="App container section">
+        <h1 className="title is-1">IronNutrition</h1>
+        <div className="columns is-gapless">
+          <div className="column is-four-fifths">
+            <Search
+              referenceSearchFood={this.searchFood}
+            />
+          </div>
+            <Form
+              referenceAddFood={this.addFood}
+            />
+        </div>
+        <div className="columns">
+          <div className="column is-half">
+            {this.listFood()}
+          </div>
+          <div className="column">
+            <FoodList 
+              foodForTheDay={this.state.foodForTheDay}
+              referenceDeleteDailyFood={this.deleteDailyFood}
+            />
+          </div>
+        </div>
       </div>
     );
   }
