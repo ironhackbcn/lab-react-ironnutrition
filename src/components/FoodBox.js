@@ -2,6 +2,17 @@ import React, { Component } from 'react';
 
 
 export default class FoodBox extends Component {
+  state = {
+    
+  }
+  // sumFood = () => {
+  //   let sum = this.state.foodUnits;
+  //   sum++
+  //   this.setState({
+  //     foodUnits: sum,
+  //   })
+  // }
+
   render() {
     return (
 <div className="box">
@@ -25,7 +36,8 @@ export default class FoodBox extends Component {
           <input
             className="input"
             type="number" 
-            value="1"
+            value={this.state.foodUnits}
+            onClick={this.sumFood}
           />
         </div>
         <div className="control">

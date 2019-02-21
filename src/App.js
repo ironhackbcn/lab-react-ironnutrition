@@ -10,7 +10,8 @@ import "bulma/css/bulma.css";
 class App extends Component {
   state = {
     foods: foods,
-    isVisible: false
+    isVisible: false,
+    todayFood: []
   };
 
   handleToggle = () => {
@@ -34,7 +35,8 @@ class App extends Component {
         e.toLowerCase()) !== -1;
     });
     this.setState({
-      foods: foundFoods
+      foods: foundFoods,
+      todayFood: []
     });
   
   }
