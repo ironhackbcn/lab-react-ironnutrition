@@ -1,25 +1,52 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import './index.css';
+import 'bulma/css/bulma.css';
+import food from './data/foods.json'
+import FoodBox from './components/FoodBox';
+import Form from './components/Form';
+import Search from './components/Search';
 
 class App extends Component {
+
+  state = {
+    foodList: food,
+    displayForm: "none",
+    todos: food
+  }
+  onDisplayForm = () => {
+    this.setState({
+      displayForm: "block"
+     })
+  }
+  addNewItem = (newFood) => {
+      console.log(newFood)
+      this.setState({
+       foodList: [...this.state.foodList, newFood],
+       todos: [...this.state.foodList, newFood],
+       displayForm: "none"
+      })
+  }
+
+  filterList = (newList) => {
+   
+    this.setState({
+      foodList: newList
+    })
+
+  }
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        <Search filterList={this.filterList} todos={this.state.todos}/>
+        <button
+          type="button"
+          onClick={this.onDisplayForm}
+        >
+          Add new foods
+        </button>
+        <Form onSubmit={this.addNewItem} display={this.state.displayForm}/>
+        <FoodBox foodBox={this.state.foodList}/>
       </div>
     );
   }
