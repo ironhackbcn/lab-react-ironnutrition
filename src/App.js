@@ -14,19 +14,26 @@ class App extends Component {
   }
 
   addNewFood = (event) =>{
-    console.log('wesdj')
     this.setState({
-     showAddFoodForm: true
+     showAddFoodForm: !this.state.showAddFoodForm
     })
-    return <AddFood />
+  }
+
+  addFoodHandler = (newFood) =>{
+    const foodCopy =[...this.state.myFood];
+    foodCopy.push(newFood);
+    this.setState({
+     myFood: foodCopy
+    })
   }
 
   render() {
     const {showAddFoodForm} = this.state;
     return (
       <div className="App">
-      <button onClick={this.addNewFood}>Add Food
-        { showAddFoodForm ? 'Show' : 'Hide'}
+      <AddFood showForm={this.state.showAddFoodForm} addFoodHandler={this.addFoodHandler}/>
+      <button onClick={this.addNewFood}>
+        { !showAddFoodForm ? 'Show add food form' : 'Hide add food form'}
       </button>
         <ul>
           { this.state.myFood.map((food, index) => {
