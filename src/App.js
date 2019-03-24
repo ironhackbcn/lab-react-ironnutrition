@@ -6,11 +6,11 @@ import foods from './data/foods.json'
 import FoodBox from './components/FoodBox';
 import AddFood from './components/AddFood';
 
-
 class App extends Component {
   state = {
-    myFood: foods,
+    myFood: [...foods],
     showAddFoodForm: false,
+    search:''
   }
 
   addNewFood = (event) =>{
@@ -27,16 +27,30 @@ class App extends Component {
     })
   }
 
+  handleSearch = (event) => {
+    this.setState({
+      search: event.target.value,
+    })
+  }
+
   render() {
+    const filteredFood = this.state.myFood.filter( item => { 
+      const list = item.name.toLowerCase();
+      const filter = this.state.search.toLowerCase();
+      return list.includes(filter);
+    });
     const {showAddFoodForm} = this.state;
     return (
       <div className="App">
+      <div>
+        <input type="text" className="input" onChange={this.handleSearch}  placeholder="Search..." />
+      </div>
       <AddFood showForm={this.state.showAddFoodForm} addFoodHandler={this.addFoodHandler}/>
       <button onClick={this.addNewFood}>
         { !showAddFoodForm ? 'Show add food form' : 'Hide add food form'}
       </button>
         <ul>
-          { this.state.myFood.map((food, index) => {
+          { filteredFood.map((food, index) => {
             return < FoodBox  
               img= { food.image} 
               name={food.name}
