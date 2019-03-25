@@ -1,25 +1,34 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import 'bulma/css/bulma.css';
+import foods from './data/foods.json'
 import './App.css';
+import FoodBox from './components/FoodBox'
 
 class App extends Component {
+  state = {
+    myFood: foods,
+  }
   render() {
+    const { myFood } = this.state;
+
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        <h1>ironNutrition</h1>
+        <button>Add new foods</button>
+        <ul>
+          {myFood.map((meals, index) => {
+          return (
+            <FoodBox 
+            key={index} 
+            index={index} 
+            name={meals.name}
+            calories={meals.calories}
+            image={meals.image}
+            quantity={meals.quantity}
+            />
+          );
+          })}
+        </ul>
       </div>
     );
   }
