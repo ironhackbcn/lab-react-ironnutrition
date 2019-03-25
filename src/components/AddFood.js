@@ -13,15 +13,6 @@ class AddFood extends Component {
     }
 }
 
-// handleChange(event) {
-//   this.setState({
-//     name: event.target.name,
-//     calories: event.target.name,
-//     img: event.target.name,
-//     quantity: event.target.name
-//   });
-// }
-
 handleFormSubmit = (event) => {
   event.preventDefault();
   this.props.addFoodHandler(this.state);   

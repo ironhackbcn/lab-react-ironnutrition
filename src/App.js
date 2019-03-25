@@ -5,17 +5,27 @@ import './App.css';
 import foods from './data/foods.json'
 import FoodBox from './components/FoodBox';
 import AddFood from './components/AddFood';
+import TodaysFood from './components/TodaysFood';
 
 class App extends Component {
   state = {
     myFood: [...foods],
     showAddFoodForm: false,
-    search:''
+    search:'',
+    todaysFood: [],
   }
 
   addNewFood = (event) =>{
     this.setState({
      showAddFoodForm: !this.state.showAddFoodForm
+    })
+  }
+
+  todaysFoodHandler = (food) => {
+    const foodToday = [...this.state.todaysFood]
+    foodToday.push(food)
+    this.setState({
+      todaysFood: foodToday
     })
   }
 
@@ -39,16 +49,20 @@ class App extends Component {
       const filter = this.state.search.toLowerCase();
       return list.includes(filter);
     });
+    const todaysFood = this.state.todaysFood;
+    // console.log(todaysFood)
+
     const {showAddFoodForm} = this.state;
     return (
       <div className="App">
       <div>
         <input type="text" className="input" onChange={this.handleSearch}  placeholder="Search..." />
       </div>
-      <AddFood showForm={this.state.showAddFoodForm} addFoodHandler={this.addFoodHandler}/>
+      <AddFood showForm={this.state.showAddFoodForm} addFoodHandler={this.addFoodHandler} />
       <button onClick={this.addNewFood}>
         { !showAddFoodForm ? 'Show add food form' : 'Hide add food form'}
       </button>
+      <div className="sections">
         <ul>
           { filteredFood.map((food, index) => {
             return < FoodBox  
@@ -58,9 +72,23 @@ class App extends Component {
               key= {index}
               index= {index}
               calories = {food.calories}
+              todaysFoodHandler={this.todaysFoodHandler}
             />
           }) }
         </ul>
+        <ul>
+          <h2>Today's foods</h2>
+          { todaysFood.map((food, index) => {
+            return < TodaysFood 
+              name={food[0]}
+              quantity = {food[2]} 
+              key= {index}
+              index= {index}
+              calories = {food[1]}
+            />
+          }) }
+        </ul>
+      </div>
       </div>
     );
   }
