@@ -43,6 +43,14 @@ class App extends Component {
     })
   }
 
+  handleDelete = (index) => {
+    const todaysFoodDelete = [...this.state.todaysFood];
+    todaysFoodDelete.splice(index, 1);
+    this.setState({
+      todaysFood: todaysFoodDelete,
+    })
+  }
+
   render() {
     const filteredFood = this.state.myFood.filter( item => { 
       const list = item.name.toLowerCase();
@@ -50,7 +58,6 @@ class App extends Component {
       return list.includes(filter);
     });
     const todaysFood = this.state.todaysFood;
-    // console.log(todaysFood)
 
     const {showAddFoodForm} = this.state;
     return (
@@ -85,6 +92,7 @@ class App extends Component {
               key= {index}
               index= {index}
               calories = {food[1]}
+              handleDelete={this.handleDelete}
             />
           }) }
         </ul>

@@ -10,14 +10,18 @@ class TodaysFood extends Component {
     }
 }
 
+  handleDelete = (e) => {
+    this.props.handleDelete(this.props.index);
+  }
+
   render() {
     const { name, calories, quantity } = this.props
-    console.log(quantity)
     if (quantity > 1 ) {
       return (
       <div>
           <p>{quantity} {name}s</p>
           <p>{calories * quantity} Cal</p>
+          <button onClick={this.handleDelete}>Delete</button>
       </div>
      )
     } else {
@@ -25,6 +29,7 @@ class TodaysFood extends Component {
         <div>
           <p>{name}</p>
           <p>{calories} Cal</p>
+          <button onClick={this.handleDelete}>Delete</button>
       </div>
       )
     }
