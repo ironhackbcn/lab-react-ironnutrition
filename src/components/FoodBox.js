@@ -2,6 +2,11 @@ import React, { Component } from "react";
 
 class FoodBox extends Component {
 
+  handleInputChange(event) {
+    let { name, value } = event.target;
+    this.setState({[name]: value });
+  }
+
   render() {
     const { name, calories, image } = this.props;
 
@@ -29,6 +34,7 @@ class FoodBox extends Component {
                   className="input"
                   type="number" 
                   value="1"
+                  onChange={(e)=>this.handleInputChange(e)}
                 />
               </div>
               <div className="control">

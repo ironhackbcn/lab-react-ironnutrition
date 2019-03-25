@@ -3,18 +3,47 @@ import 'bulma/css/bulma.css';
 import foods from './data/foods.json'
 import './App.css';
 import FoodBox from './components/FoodBox'
+import AddFoodHandler from './components/AddFood'
 
 class App extends Component {
+  
   state = {
     myFood: foods,
+    showAddFoodForm: false,
   }
+
+  AddFoodHandler = (food) => {
+    const foodCopy = [...this.state.myFood];
+    foodCopy.push(food);
+    this.setState({
+      myFood: foodCopy,
+    })
+    this.showForm();
+  }
+
+  showForm = () => {
+    const { showAddFoodForm } = this.state;
+    if (!showAddFoodForm) {
+      console.log('Adding New Food')
+      this.setState({
+       showAddFoodForm: true,
+      })
+    } else {
+      console.log('Press button again')
+      this.setState({
+        showAddFoodForm: false,
+       })
+    }
+  }
+
   render() {
-    const { myFood } = this.state;
+    const { myFood, showAddFoodForm } = this.state;
 
     return (
       <div className="App">
         <h1>ironNutrition</h1>
-        <button>Add new foods</button>
+        { !showAddFoodForm ? <button onClick={this.showForm}>Add Food</button> : 
+        <AddFoodHandler addFoodHandler={this.AddFoodHandler} showForm={this.state.showAddFoodForm}/>}
         <ul>
           {myFood.map((meals, index) => {
           return (
