@@ -1,25 +1,50 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import foods from './data/foods.json';
+import FoodBox from './Components/FoodBox.js';
+import AddFood from './Components/AddFood';
 import './App.css';
 
 class App extends Component {
+  state= {
+    foods: foods,
+    foodAdded: '',
+    showForm: false,
+  }
+  showForm = ()=> {
+    this.setState({
+      showForm: true,
+    });
+  }
+
+  hideForm = () => {
+    this.setState({
+      showForm: false,
+    });
+  }
+
+  addFood = (foodAdded) => {
+    this.setState({
+      foods: [...this.state.foods, foodAdded],
+    });
+    this.hideForm();
+  }
+
   render() {
     return (
+      
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        <button onClick={this.showForm}>Add food</button>
+        {this.state.showForm && <AddFood addedFood={this.addFood}/>
+        }
+        {this.state.foods.map( (food, index) => {
+          return <FoodBox 
+          key={index}
+          name={food.name}
+          calories={food.calories}
+          image={food.image}
+          addFood={this.addFood}
+          />
+        })} 
       </div>
     );
   }
