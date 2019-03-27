@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 
 class FoodBox extends Component {
 
-    addFood = () => this.props.addFood()
-    
     render() {
       return (
         <div className="box">
@@ -28,7 +26,7 @@ class FoodBox extends Component {
                       className="input"
                       type="number" 
                       value="1"
-                    />
+                      />
                   </div>
                   <div className="control">
                     <button className="button is-info">
