@@ -6,11 +6,14 @@ import Search from './Components/Search';
 import './App.css';
 
 class App extends Component {
-  state= {
+  state = {
     foods: foods,
     filteredFoods: foods,
     showForm: false,
+    totalCalories: 0,
+    chosenFoods: []
   }
+
   showForm = ()=> {
     this.setState({
       showForm: true,
@@ -37,22 +40,42 @@ class App extends Component {
     ))
   }
 
+  addToCart = (quantity, name, calories) => {
+    this.setState((state) => (
+      {
+        chosenFoods:[...state.chosenFoods, {quantity, name, calories} ],
+        totalCalories: state.totalCalories + quantity * calories
+      }
+    ))
+  }
+
   render() {
     return (
       
       <div className="App">
-        <Search renameMe={this.findFood}/><br/>
-        <button onClick={this.showForm}>Add food</button>
-        {this.state.showForm && <AddFood addedFood={this.addFood}/>
-        }
-        {this.state.filteredFoods.map( (food, index) => {
-          return <FoodBox 
-          key={index}
-          name={food.name}
-          calories={food.calories}
-          image={food.image}
-          />
-        })} 
+        <div>
+          <Search searched={this.findFood}/><br/>
+          <button onClick={this.showForm}>Add food</button>
+          {this.state.showForm && <AddFood addedFood={this.addFood}/>
+          }
+          {this.state.filteredFoods.map( (food, index) => {
+            return <FoodBox 
+            key={index}
+            name={food.name}
+            calories={food.calories}
+            image={food.image}
+            addToCart={this.addToCart}/>
+          })}
+        </div>
+        <div>
+          <h2>Today's foods</h2>
+          <ul>
+            {this.state.chosenFoods.map( (food, index) => {
+              return <li>{food.quantity} {food.name} = {food.quantity*food.calories} cal</li>
+            })}
+          </ul>
+          <p>Total {this.state.totalCalories} cal</p>  
+        </div> 
       </div>
     );
   }
