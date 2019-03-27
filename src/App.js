@@ -41,12 +41,17 @@ class App extends Component {
   }
 
   addToCart = (quantity, name, calories) => {
-    this.setState((state) => (
-      {
-        chosenFoods:[...state.chosenFoods, {quantity, name, calories} ],
-        totalCalories: state.totalCalories + quantity * calories
+    this.setState((state) => {
+      let chosenFoods = state.chosenFoods
+      const existingChosenFood = state.chosenFoods.find(food => food.name === name)
+      if (existingChosenFood) {
+        existingChosenFood.quantity += quantity
+      } else {
+        chosenFoods = [...state.chosenFoods, {quantity, name, calories} ];
       }
-    ))
+      const totalCalories = state.totalCalories + quantity * calories
+      return { chosenFoods, totalCalories };
+    })
   }
 
   render() {
