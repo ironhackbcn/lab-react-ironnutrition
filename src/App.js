@@ -3,7 +3,8 @@ import 'bulma/css/bulma.css';
 import foods from './data/foods.json'
 import './App.css';
 import FoodBox from './components/FoodBox'
-import AddFoodHandler from './components/AddFood'
+import AddFood from './components/AddFood'
+import SearchFood from './components/SearchFood'
 
 class App extends Component {
   
@@ -36,6 +37,16 @@ class App extends Component {
     }
   }
 
+  SearchFood = (searchWords) => {
+    console.log(searchWords);
+    const filteredFoods = foods.filter((food) => {
+      return food.name.toLowerCase().indexOf(searchWords.toLowerCase()) > -1;
+      })
+      this.setState({
+        myFood: [...filteredFoods],
+      });
+  }
+
   render() {
     const { myFood, showAddFoodForm } = this.state;
 
@@ -43,7 +54,8 @@ class App extends Component {
       <div className="App">
         <h1>ironNutrition</h1>
         { !showAddFoodForm ? <button onClick={this.showForm}>Add Food</button> : 
-        <AddFoodHandler addFoodHandler={this.AddFoodHandler} showForm={this.state.showAddFoodForm}/>}
+        <AddFood addFoodHandler={this.AddFoodHandler} showForm={this.state.showAddFoodForm}/>}
+        <SearchFood search={this.SearchFood}/>
         <ul>
           {myFood.map((meals, index) => {
           return (

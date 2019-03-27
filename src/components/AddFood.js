@@ -10,10 +10,20 @@ class AddFood extends Component {
   }
 
   handleInput = (e) => {
+    console.log(e.target)
     this.setState({
       [e.target.name]: e.target.value,
     })
   }
+
+  //Otra forma de hacerlo con desestructuracion:
+  // handleInput = (e) => {
+  //   console.log(e.target)
+  //   let { name, value } = e.target;
+  //   this.setState({
+  //     [name]: value,
+  //   })
+  // }
 
   handleFormSubmit = (event) => {
     event.preventDefault();
