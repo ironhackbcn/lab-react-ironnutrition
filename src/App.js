@@ -10,7 +10,6 @@ class App extends Component {
     foods: foods,
     filteredFoods: foods,
     showForm: false,
-    totalCalories: 0,
     chosenFoods: []
   }
 
@@ -49,8 +48,14 @@ class App extends Component {
       } else {
         chosenFoods = [...state.chosenFoods, {quantity, name, calories} ];
       }
-      const totalCalories = state.totalCalories + quantity * calories
-      return { chosenFoods, totalCalories };
+      return { chosenFoods };
+    })
+  }
+
+  unchooseFood = (index) => {
+    this.state.chosenFoods.splice(index,1);
+    this.setState({
+      chosenFoods: this.state.chosenFoods
     })
   }
 
@@ -76,10 +81,15 @@ class App extends Component {
           <h2>Today's foods</h2>
           <ul>
             {this.state.chosenFoods.map( (food, index) => {
-              return <li>{food.quantity} {food.name} = {food.quantity*food.calories} cal</li>
+              return <li>{food.quantity} &nbsp;
+              {food.name} = {food.quantity*food.calories} cal
+              <button onClick={e => this.unchooseFood(index)}>Delete</button>
+              </li>
             })}
           </ul>
-          <p>Total {this.state.totalCalories} cal</p>  
+          <p>Total {this.state.chosenFoods
+            .map(food => food.calories * food.quantity)
+            .reduce((a,b) => a + b, 0)} cal</p>  
         </div> 
       </div>
     );
