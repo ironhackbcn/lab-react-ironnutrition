@@ -79,7 +79,7 @@ class App extends Component {
           })}
         </div>
         <div>
-          <h2>Today's foods</h2>
+          <p className="todayHeading">Today's foods</p>
           <ul>
             {this.state.chosenFoods.map( (food, index) => {
               return <li>{food.quantity} &nbsp;

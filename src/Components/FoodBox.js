@@ -20,7 +20,7 @@ class FoodBox extends Component {
 
   render() {
     return (
-      <div className="media">
+      <div className="media additionHeight">
           <article className="foodContainer">
             <div className="media-left">
               <figure className="image is-64x64">
