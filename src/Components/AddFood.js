@@ -12,7 +12,6 @@ class AddFood extends Component {
     _handleSubmit(e) {
         e.preventDefault();
         this.props.addedFood(this.state);
-        console.log('food added')
     }
     
     _handleChange = (event) => {

@@ -44,7 +44,8 @@ class App extends Component {
       let chosenFoods = state.chosenFoods
       const existingChosenFood = state.chosenFoods.find(food => food.name === name)
       if (existingChosenFood) {
-        existingChosenFood.quantity += quantity
+        existingChosenFood.quantity = Number(existingChosenFood.quantity) + Number(quantity)
+        
       } else {
         chosenFoods = [...state.chosenFoods, {quantity, name, calories} ];
       }
@@ -82,7 +83,7 @@ class App extends Component {
           <ul>
             {this.state.chosenFoods.map( (food, index) => {
               return <li>{food.quantity} &nbsp;
-              {food.name} = {food.quantity*food.calories} cal
+              {food.name} = {food.quantity*food.calories} cal &nbsp;
               <button onClick={e => this.unchooseFood(index)}>Delete</button>
               </li>
             })}

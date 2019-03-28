@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
-
-const imageStyle = {
-  'max-width': '7em'
-}
+import 'bulma/css/bulma.css'
 
 class FoodBox extends Component {
   
@@ -19,38 +16,37 @@ class FoodBox extends Component {
 
   addToCart = () => {
     this.props.addToCart(this.state.quantity, this.props.name, this.props.calories)
-    console.log(`TODO: add ${this.state.quantity} ${this.props.name}'s to the cart`)
   }
 
   render() {
     return (
-      <div className="box">
-          <article className="media">
+      <div className="media">
+          <article className="foodContainer">
             <div className="media-left">
               <figure className="image is-64x64">
-                <img src={this.props.image} alt='' style={imageStyle}/>
+                <img src={this.props.image} alt=''/>
               </figure>
             </div>
             <div className="media-content">
-              <div className="content">
+              <div className="control">
                 <p>
                   <strong>{this.props.name}</strong><br/>
                   <small>{this.props.calories}</small><br/>
                 </p>
               </div>
             </div>
-            <div className="media-right">
+            <div className="">
               <div className="field has-addons">
                 <div className="control">
                   <input
-                    className="input"
+                    className="input additionHeight"
                     type="number"
                     min="1" 
                     value={this.state.quantity}
                     onChange={this.quantityChanged}/>
                 </div>
                 <div className="control">
-                  <button className="button is-info" onClick={this.addToCart}>
+                  <button className="button is-info additionHeight" onClick={this.addToCart}>
                     +
                   </button>
                 </div>
