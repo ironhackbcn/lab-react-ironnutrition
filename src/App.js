@@ -48,9 +48,17 @@ class App extends Component {
   }
 
   addTodayFood = (name, calories, quantity) => {
-    this.setState({
-      todayFood: [...this.state.todayFood, {name, calories, quantity}],
-      totalCalories: this.state.totalCalories + quantity * calories,
+    this.setState(() => {
+      let todayFood = this.state.todayFood;
+      const searchFood = this.state.todayFood.find(food => name === food.name);
+      console.log('Found!', searchFood);
+      if (searchFood === undefined) {
+          todayFood = [...this.state.todayFood, {name, calories, quantity}];
+        } else {
+          searchFood.quantity += quantity;   
+        }
+      const totalCalories = this.state.totalCalories + quantity * calories;
+      return { todayFood, totalCalories };
     })
   }
 

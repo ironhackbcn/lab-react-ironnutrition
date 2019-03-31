@@ -7,8 +7,9 @@ class FoodBox extends Component {
   }
 
   handleInputChange = (event) => {
-    const { value } = event.target;
-    console.log('hey value', value)
+    let { value } = event.target;
+    value = Number(value);
+    console.log('hey value', value, typeof(value))
     this.setState({
       quantity: value,
     });
