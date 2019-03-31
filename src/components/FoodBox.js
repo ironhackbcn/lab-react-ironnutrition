@@ -2,9 +2,27 @@ import React, { Component } from "react";
 
 class FoodBox extends Component {
 
-  handleInputChange(event) {
-    let { name, value } = event.target;
-    this.setState({[name]: value });
+  state = {
+    quantity: 1,
+  }
+
+  handleInputChange = (event) => {
+    const { value } = event.target;
+    console.log('hey value', value)
+    this.setState({
+      quantity: value,
+    });
+  }
+
+  // handleClick = () => {
+  //   const todayFood = this.props;
+  //   console.log(this.props, this.state.quantity);
+  //   this.props.addTodayFood(todayFood, this.state.quantity);
+  // }
+
+  handleClick = () => {
+    const {name, calories} = this.props;
+    this.props.addTodayFood(name, calories, this.state.quantity);
   }
 
   render() {
@@ -33,12 +51,12 @@ class FoodBox extends Component {
                 <input
                   className="input"
                   type="number" 
-                  value="1"
-                  onChange={(e)=>this.handleInputChange(e)}
+                  value={this.state.quantity}
+                  onChange={this.handleInputChange}
                 />
               </div>
               <div className="control">
-                <button className="button is-info">
+                <button onClick={this.handleClick} className="button is-info">
                   +
                 </button>
               </div>

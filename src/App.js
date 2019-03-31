@@ -11,6 +11,8 @@ class App extends Component {
   state = {
     myFood: foods,
     showAddFoodForm: false,
+    todayFood: [],
+    totalCalories: 0,
   }
 
   AddFoodHandler = (food) => {
@@ -25,12 +27,10 @@ class App extends Component {
   showForm = () => {
     const { showAddFoodForm } = this.state;
     if (!showAddFoodForm) {
-      console.log('Adding New Food')
       this.setState({
        showAddFoodForm: true,
       })
     } else {
-      console.log('Press button again')
       this.setState({
         showAddFoodForm: false,
        })
@@ -47,8 +47,15 @@ class App extends Component {
       });
   }
 
+  addTodayFood = (name, calories, quantity) => {
+    this.setState({
+      todayFood: [...this.state.todayFood, {name, calories, quantity}],
+      totalCalories: this.state.totalCalories + quantity * calories,
+    })
+  }
+
   render() {
-    const { myFood, showAddFoodForm } = this.state;
+    const { myFood, showAddFoodForm, todayFood } = this.state;
 
     return (
       <div className="App">
@@ -56,20 +63,36 @@ class App extends Component {
         { !showAddFoodForm ? <button onClick={this.showForm}>Add Food</button> : 
         <AddFood addFoodHandler={this.AddFoodHandler} showForm={this.state.showAddFoodForm}/>}
         <SearchFood search={this.SearchFood}/>
-        <ul>
-          {myFood.map((meals, index) => {
-          return (
-            <FoodBox 
-            key={index} 
-            index={index} 
-            name={meals.name}
-            calories={meals.calories}
-            image={meals.image}
-            quantity={meals.quantity}
-            />
-          );
-          })}
-        </ul>
+        <div className="columns">
+          <div className="column">
+            <ul>
+              {myFood.map((meals, index) => {
+              return (
+                <FoodBox 
+                key={index} 
+                index={index} 
+                name={meals.name}
+                calories={meals.calories}
+                image={meals.image}
+                quantity={meals.quantity}
+                addTodayFood={this.addTodayFood}
+                />
+              );
+              })}
+            </ul>
+          </div>
+          <div className="column">
+            <h1>Today's Food</h1>
+              {todayFood.map((meals, index) => {
+                return (
+                <ul key={index}>
+                {meals.quantity} {meals.name} = {meals.calories * meals.quantity} cal
+                </ul>
+                );
+              })}
+              <h2>Total: {this.state.totalCalories}</h2>
+          </div>
+        </div>
       </div>
     );
   }
