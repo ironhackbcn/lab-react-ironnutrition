@@ -1,0 +1,72 @@
+import React, { Component } from 'react';
+class FoodBox extends Component {
+
+  constructor(props) {
+    super(props);
+    const {item} = this.props;
+    this.state = {
+      image:item.image,
+      name:item.name,
+      calories:item.calories,
+      quantity:0,
+    }
+  }
+
+  handleChange = (e) => {
+    const { value } = e.target;
+    if (value) {
+      this.setState({
+        quantity: parseInt(value),
+      });
+    }
+  }
+
+  handleClick(e) {
+    const {item,addTodayFood } = this.props
+    let newItem = item;
+    newItem.quantity += this.state.quantity;
+    newItem.calories = newItem.calories * newItem.quantity;
+    addTodayFood(newItem);
+  }
+
+  render() {
+    return (
+      <div className="box">
+        <article className="media">
+          <div className="media-left">
+            <figure className="image is-64x64">
+              <img alt='img' src= {this.state.image} />
+            </figure>
+          </div>
+          <div className="media-content">
+            <div className="content">
+              <p>
+                <strong>{this.state.name}</strong> <br />
+                <small>{this.state.calories}</small>
+              </p>
+            </div>
+          </div>
+          <div className="media-right">
+            <div className="field has-addons">
+              <div className="control">
+                <input
+                  name= {this.state.quantity}
+                  className="input"
+                  type="number" 
+                  value={this.state.quantity} onChange={this.handleChange}
+                />
+              </div>
+              <div className="control">
+                <button className="button is-info" onClick={(e) => {this.handleClick(e)}}>
+                  +
+                </button>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+    );
+  }
+}
+
+export default FoodBox;
