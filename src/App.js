@@ -7,7 +7,7 @@ import Form from './components/Form';
 class App extends Component {
   state = {
     foods:foods,
-    showform: false
+    showForm: false
   }
   handleFood = (event) =>{
     const {showForm} = this.state;
@@ -16,14 +16,22 @@ class App extends Component {
     })
   }
 
+  handleAddNewFood = (newFood) => {
+    const foodsCopy = [...this.state.foods];
+    foodsCopy.push(newFood);
+    this.setState({
+      foods: foodsCopy,
+    })
+  }
+
   render () {
     return (
       <div className="App">
         <button onClick={() =>{this.handleFood()}}>New food</button>
-        { this.state.showForm && <Form />}
+        { this.state.showForm && <Form handlePropsFood={this.handleAddNewFood }/>}
         {this.state.foods.map((food, index)=> {
           return(
-            <FoodBox 
+            <FoodBox foods={this.state.foods}
             key={index}
             name={food.name}
             calories={food.calories}

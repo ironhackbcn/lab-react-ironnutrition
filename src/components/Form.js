@@ -5,7 +5,6 @@ class Form extends Component {
         name: '',
         calories: '',
         image: '',
-        foods: [],
     }
     
     handleInputChange = (event) => {
@@ -14,6 +13,18 @@ class Form extends Component {
             [name]: value
         })
     }
+
+    handleSubmit = (event) => {
+        event.preventDefault();
+        const {name, calories, image} = this.state;
+        const newFood = {name, calories, image};
+        this.props.handlePropsFood (newFood)
+        this.setState({
+          name: '',
+          calories: '',
+          image: '',
+        })
+      }
     render() {
         
         const {name, calories, image} = this.state;
@@ -21,13 +32,14 @@ class Form extends Component {
         return (
             <div>
                 <h2>Foods</h2>
-                <form>
+                <form onSubmit={this.handleSubmit}>
                     <label htmlFor='name'>Name</label>
                     <input id= 'name' type='text' name= 'name' placeholder ='Pizza' value={name} onChange = {this.handleInputChange}/>
                     <label htmlFor='calories'>Calories</label>
                     <input id='calories' type= 'number' name='calories' placeholder = '400' value= {calories} onChange = {this.handleInputChange}/>
                     <label htmlFor='image'>Image</label>
                     <input id='image' type='text'name= 'image' placeholder = 'picture' value= {image} onChange = {this.handleInputChange}></input>
+                    <button>Add new food</button>
                 </form>
 
             </div>
