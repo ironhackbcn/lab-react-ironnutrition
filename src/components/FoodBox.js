@@ -1,21 +1,23 @@
 import React, { Component } from 'react'
 
 class FoodBox extends Component {
+
+
   render() {
-    const { food } = this.props;
+    const { name, calories, image, quantity } = this.props.food;
     return (
       <div className="box">
         <article className="media">
           <div className="media-left">
             <figure className="image is-64x64">
-              <img src="https://i.imgur.com/eTmWoAN.png" />
+              <img src={image} alt={name} />
             </figure>
           </div>
           <div className="media-content">
             <div className="content">
               <p>
-                <strong>Pizza</strong> <br />
-                <small>400 cal</small>
+                <strong>{name}</strong> <br />
+                <small>{calories}</small>
               </p>
             </div>
           </div>
@@ -25,13 +27,13 @@ class FoodBox extends Component {
                 <input
                   className="input"
                   type="number"
-                  value="1"
+                  value={quantity}
                 />
               </div>
               <div className="control">
                 <button className="button is-info">
                   +
-          </button>
+                </button>
               </div>
             </div>
           </div>
@@ -41,6 +43,6 @@ class FoodBox extends Component {
   }
 }
 
-export default FoodBox
+export default FoodBox;
 
 

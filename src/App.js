@@ -10,7 +10,15 @@ class App extends Component {
         <header className="App-header">
         </header>
         <main>
-          <FoodBox />
+          <ul>
+            {foods.map((food, index) => {
+              return (
+                <li key={index}>
+                  <FoodBox food={food} />
+                </li>
+              );
+            })}
+          </ul>
         </main>
       </div>
     );
