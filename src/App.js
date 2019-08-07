@@ -28,7 +28,7 @@ class App extends Component {
     return (
       <div className="App">
         <button onClick={() =>{this.handleFood()}}>New food</button>
-        { this.state.showForm && <Form handlePropsFood={this.handleAddNewFood }/>}
+        { this.state.showForm && <Form handleShowForm={this.handleFood} handlePropsFood={this.handleAddNewFood }/>}
         {this.state.foods.map((food, index)=> {
           return(
             <FoodBox foods={this.state.foods}

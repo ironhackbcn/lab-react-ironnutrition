@@ -18,7 +18,8 @@ class Form extends Component {
         event.preventDefault();
         const {name, calories, image} = this.state;
         const newFood = {name, calories, image};
-        this.props.handlePropsFood (newFood)
+        this.props.handlePropsFood (newFood);
+        this.props.handleShowForm()
         this.setState({
           name: '',
           calories: '',
@@ -26,9 +27,7 @@ class Form extends Component {
         })
       }
     render() {
-        
         const {name, calories, image} = this.state;
-
         return (
             <div>
                 <h2>Foods</h2>
@@ -41,7 +40,6 @@ class Form extends Component {
                     <input id='image' type='text'name= 'image' placeholder = 'picture' value= {image} onChange = {this.handleInputChange}></input>
                     <button>Add new food</button>
                 </form>
-
             </div>
         )
     }
