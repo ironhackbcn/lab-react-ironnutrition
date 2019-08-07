@@ -31,3 +31,12 @@
     transform: rotate(360deg);
   }
 }
+
+.food-box{
+    display: grid;
+    grid-template-columns: 1fr 1fr ;
+}
+
+#delete-button{
+    background: rgb(180, 60, 60);
+}
