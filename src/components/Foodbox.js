@@ -16,7 +16,7 @@ import React, { Component } from 'react'
       <div className="content">
         <p>
           <strong>{food.name}</strong> <br />
-          <small>{food.calories}</small>
+          <small>{food.calories} calories</small>
         </p>
       </div>
       </div>
@@ -26,7 +26,7 @@ import React, { Component } from 'react'
           <input
             className="input"
             type="number" 
-            value="1"
+            value={food.quantity}
           />
         </div>
         <div className="control">

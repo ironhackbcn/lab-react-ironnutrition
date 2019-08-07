@@ -8,6 +8,7 @@ class Button extends Component  {
     image: '',
     foods: [],
     isAddingNew: false,
+    quantity: []
   }
 
 addNewFood = (event) => {

@@ -9,18 +9,28 @@ class App extends Component {
   state = {
     foods,
     originalFoods: foods,
+    name: '',
+    calories: '',
+    image: '',
+    isAddingNew: false,
+    quantity: []
   }
 
   changeFoods = (foods) => {
     this.setState({foods})
   }
 
+  showFood = (foods) => {
+    this.setState({foods})
+  }
+
+
   render() {
     return (
       <div className="App">
       <Button />
       <Search changeFoods={this.changeFoods} originalFoods={this.state.originalFoods}/>
-      <Foodbox foods={this.state.foods}/>
+      <Foodbox foods={this.state.foods} showFood={this.showFood}/>
       </div>
     );
   }
