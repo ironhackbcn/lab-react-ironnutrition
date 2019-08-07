@@ -2,7 +2,6 @@ import React from 'react';
 
 export default function TodaysFoods(props) {
   const { selectedFoods, totalCalories } = props;
-  console.log(selectedFoods)
   return (
     <article>
       <h2>Today's foods</h2>

@@ -61,15 +61,30 @@ class FoodBox extends Component {
     this.setState({ foods: filterFoods });
   };
 
-  handlePlusButton = (name, calories, quantity) => {
-    console.log(name, calories, quantity);
-    const selectedFood = { name, calories, quantity };
-    const selectedFoodsCopy = [...this.state.selectedFoods];
-    selectedFoodsCopy.push(selectedFood);
+  handlePlusButton = (name, calories, quantity, index) => {
+    let isPresent = false;
+    const selectedFoodsCopy = this.state.selectedFoods.map((food) =>{
+      if (food.name === name ) {
+        isPresent = true;
+        food.quantity = +food.quantity + +quantity;
+       return food;
+      } else {
+        return food;
+      }
+    });
+    if(isPresent === false ){
+      selectedFoodsCopy.push({name, calories, quantity});
+    };
     const totalCalories = this.state.totalCalories + calories * quantity;
+    const foodsCopy = [...this.state.foods];
+    const foodCopy = { ...this.state.foods[index] };
+    foodCopy.quantity = 0;
+    foodsCopy[index] = foodCopy;
+
     this.setState({
       selectedFoods: selectedFoodsCopy,
-      totalCalories
+      totalCalories,
+      foods: foodsCopy
     });
   };
 
@@ -164,7 +179,8 @@ class FoodBox extends Component {
                             this.handlePlusButton(
                               food.name,
                               food.calories,
-                              food.quantity
+                              food.quantity,
+                              index
                             );
                           }}
                         >
@@ -188,3 +204,5 @@ class FoodBox extends Component {
 }
 
 export default FoodBox;
+
+
