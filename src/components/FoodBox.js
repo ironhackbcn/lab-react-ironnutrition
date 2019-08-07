@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import foods from '../data/foods.json';
+import Form from './Form.js';
+import FoodCard from './FoodCard.js';
+import TotalList from './TotalList.js';
 
 class FoodBox extends Component {
   state = {
@@ -8,7 +11,10 @@ class FoodBox extends Component {
     showFood: foods,
     name: '',
     calories: '',
-    image:''
+    image:'',
+    totalCalories:0,
+    addFood : [] //aquí tengo que añadir los objetos addFood de FoodCard
+
   }
   
   changeFormStatus = (event) => {
@@ -38,7 +44,7 @@ class FoodBox extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    const {name,calories,image, foodsArr, showForm} = this.state;
+    const {name,calories,image,foodsArr,showForm} = this.state;
     const foodsCopy = [...foodsArr];
     const newFood = {name, calories, image};
     foodsCopy.push(newFood)
@@ -55,7 +61,7 @@ class FoodBox extends Component {
   }
 
   render() {
-    const {showForm, name, calories, image,search, showFood} = this.state
+    const {showForm, name, calories, image,search, showFood, addFood} = this.state
     return (
       <>
         <input className="input"
@@ -66,43 +72,8 @@ class FoodBox extends Component {
           value={search}
           onChange = {this.handleSearch}
         />
-
         {showForm ? 
-        <form onSubmit={this.handleSubmit}>
-          <label htmlFor="name">Name</label>
-          <input 
-            className="input"
-            type="text" 
-            id="name" 
-            name="name" 
-            placeholder="Pasta" 
-            value={name}
-            onChange = {this.handleInputChange}
-          />
-
-          <label htmlFor="calories">Calories</label>
-          <input 
-            className="input"
-            type="number" 
-            id="calories" 
-            name="calories" 
-            placeholder="120" 
-            value={calories}
-            onChange = {this.handleInputChange}
-          />
-
-          <label htmlFor="name">Image</label>
-          <input 
-            className="input"
-            type="text" 
-            id="image" 
-            name="image" 
-            placeholder="http://www.google.com/image-url" 
-            value={image}
-            onChange = {this.handleInputChange}
-          />
-          <button className="button is-info">+ Add</button>
-        </form> : null}
+        <Form name={name} calories={calories} image={image} /> : null}
         {!showForm ? 
         <button onClick={this.changeFormStatus} className="button is-info">Add new food</button> 
         :<button className="button is-info" onClick={this.changeFormStatus}>Cancel</button>
@@ -110,41 +81,12 @@ class FoodBox extends Component {
         <div className="box">
         {showFood.map( (food, index) => {
           return (
-            <article className="media" key={index}>
-              <div className="media-left">
-                <figure className="image is-64x64">
-                  <img src={food.image} alt={food.name} />
-                </figure>
-              </div>
-              <div className="media-content">
-                <div className="content">
-                  <p>
-                    <strong>{food.name}</strong> <br />
-                    <small>{food.calories}</small>
-                  </p>
-                </div>
-              </div>
-              <div className="media-right">
-                <div className="field has-addons">
-                  <div className="control">
-                    <input
-                      className="input"
-                      type="number" 
-                      value="1"
-                    />
-                  </div>
-                  <div className="control">
-                    <button className="button is-info">
-                      +
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </article>
+            <FoodCard food={food} index={index} />
           )
         } 
         )}
         </div> 
+        <TotalList food={addFood} />
       </>
     )
   }
