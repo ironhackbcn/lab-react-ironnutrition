@@ -10,7 +10,7 @@ class App extends Component {
     showForm: false
   }
 
-  showFoodForm = (event) => {
+  showFoodForm = () => {
     const { showForm } = this.state
     this.setState({
       showForm: !showForm
@@ -44,12 +44,10 @@ class App extends Component {
             </section>
           );
         })}
-
       </div>
     );
   }
 }
-
 
 export default App;
 
