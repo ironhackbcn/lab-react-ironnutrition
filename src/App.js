@@ -56,8 +56,6 @@ class App extends Component {
     const newArray = foods.filter((element) => {
       if(element.name.toLowerCase().includes(value.toLowerCase())) return element;
     });
-    console.log(newArray)
-
     this.setState({
       inputFood: value,
       selectedFoods: newArray
@@ -66,14 +64,8 @@ class App extends Component {
   handleAddFood (e, index) {
     const { selectedFoods, addedFoods } = this.state;
     const food = selectedFoods[index];
-    console.log(e.target);
-    food.quantity = e.target.value;
     const newAddedFoods = [...addedFoods];
-    
-    // const stringArray = 
-
     newAddedFoods.push(food);
-    console.log(newAddedFoods);
     this.setState({
       addedFoods: newAddedFoods
     })
