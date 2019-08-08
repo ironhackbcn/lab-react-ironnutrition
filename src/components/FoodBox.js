@@ -24,12 +24,12 @@ class FoodBox extends Component {
     })
   }
 
-  handleInputChange = (event) => {
-    const {name, value} = event.target
-    this.setState({
-      [name]: value
-    })
-  }
+  // handleInputChange = (event) => {
+  //   const {name, value} = event.target
+  //   this.setState({
+  //     [name]: value
+  //   })
+  // }
   
   handleSearch = (event) => {
     const {value} = event.target;
@@ -42,11 +42,9 @@ class FoodBox extends Component {
     })
   }
 
-  handleSubmit = (event) => {
-    event.preventDefault();
-    const {name,calories,image,foodsArr,showForm} = this.state;
+  addNewFood = (newFood) => {
+    const {foodsArr,showForm} = this.state;
     const foodsCopy = [...foodsArr];
-    const newFood = {name, calories, image};
     foodsCopy.push(newFood)
 
     this.setState({
@@ -59,6 +57,24 @@ class FoodBox extends Component {
       showForm: !showForm,
     })
   }
+
+  // handleSubmit = (event) => {
+  //   event.preventDefault();
+  //   const {name,calories,image,foodsArr,showForm} = this.state;
+  //   const foodsCopy = [...foodsArr];
+  //   const newFood = {name, calories, image};
+  //   foodsCopy.push(newFood)
+
+  //   this.setState({
+  //     foodsArr:foodsCopy,
+  //     showFood:foodsCopy,
+  //     name: '',
+  //     calories: '',
+  //     image:'',
+  //     search:'',
+  //     showForm: !showForm,
+  //   })
+  // }
 
   render() {
     const {showForm, name, calories, image,search, showFood, addFood} = this.state
@@ -73,7 +89,7 @@ class FoodBox extends Component {
           onChange = {this.handleSearch}
         />
         {showForm ? 
-        <Form name={name} calories={calories} image={image} /> : null}
+        <Form  name={name} calories={calories} image={image} addNewFood={this.addNewFood} /> : null}
         {!showForm ? 
         <button onClick={this.changeFormStatus} className="button is-info">Add new food</button> 
         :<button className="button is-info" onClick={this.changeFormStatus}>Cancel</button>
