@@ -1,5 +1,5 @@
 .container {
-      width: 600px;
+      width: 960px;
       max-width: 900px;
       margin-top: 30px;
     }
@@ -43,4 +43,9 @@
     
     ul {
       margin-bottom: 10px;
+    }
+
+    h1 {
+      font-size: 30px;
+      font-weight: bold;
     }
