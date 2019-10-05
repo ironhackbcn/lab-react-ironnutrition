@@ -1,17 +1,38 @@
+h1 {
+  font-size: 30px !important;
+  font-weight: bold !important;
+}
+
+.search-bar {
+  width: 100%;
+  font-size: 18px;
+  height: 45px;
+  margin-bottom: 30px;
+}
+
+.main-section {
+  display: flex;
+  justify-content: left;
+}
+
+.btn {
+  width: 150px;
+  margin: 0 10px 10px 20px;
+  font-size: 18px;
+  padding: 5px;
+}
+
+
 .container {
-      width: 960px;
-      max-width: 900px;
-      margin-top: 30px;
-    }
+    width: 960px;
+    max-width: 900px;
+    margin-top: 30px;
+}
     
-    .search-bar {
-      margin-bottom: 30px;
-    }
-    
-    .box {
-      padding: 0;
-      max-width: 400px;
-    }
+.box {
+  padding: 0;
+  max-width: 400px;
+}
     
     .box .media {
       -ms-flex-align: center;
@@ -45,7 +66,4 @@
       margin-bottom: 10px;
     }
 
-    h1 {
-      font-size: 30px;
-      font-weight: bold;
-    }
+    

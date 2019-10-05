@@ -24,7 +24,8 @@ class FoodBox extends Component {
                 <input
                   className="input"
                   type="number"
-                  value={this.props.quantity}
+                  value="0"
+                // value={this.props.quantity}
                 />
               </div>
               <div className="control">
