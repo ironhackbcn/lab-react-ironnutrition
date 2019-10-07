@@ -10,12 +10,18 @@ class App extends Component {
     allFood: [...foods],
     searchedFood: [...foods],
     form: "",
-    visible: true
+    visible: true,
+    visibleSearchNFindFood: true
   };
 
-  HandleHideShowFood = () => {
+  handleHideShowFood = () => {
     const { visible } = this.state;
     this.setState({ visible: !visible });
+  };
+
+  handleOnOffvisibleSearchNFindFood = () => {
+    const { visibleSearchNFindFood } = this.state;
+    this.setState({ visibleSearchNFindFood: !visibleSearchNFindFood });
   };
 
   HandleSearch = value => {
@@ -33,21 +39,27 @@ class App extends Component {
   };
 
   render() {
-    const { form, searchedFood, visible } = this.state;
+    const { form, searchedFood, visible, visibleSearchNFindFood } = this.state;
 
     return (
       <div className="App">
         <header className="App-header">
           <h1 className="App-h1">IronNutrition</h1>
 
-         {/*This is form and button component */}
-         {visible ? <div>
-          <AddFood onoffShowFood={this.HandleHideShowFood} />
-          {/* This is a Search Food Bar*/}
-          <FindFood myFunction={this.HandleSearch} valueForm={form} />
-          {/*This is a Searched Food Map */}
-          <SearchedFood sfood={searchedFood} />
-          </div> : null}
+          {/*This is form and button component */}
+          {visible ? (
+            <div>
+              <AddFood onoffShowFood={this.handleOnOffvisibleSearchNFindFood} />
+              {/* This is a Search Food Bar*/}
+              {visibleSearchNFindFood ? (
+                <div>
+                  <FindFood myFunction={this.HandleSearch} valueForm={form} />
+                  {/*This is a Searched Food Map */}
+                  <SearchedFood sfood={searchedFood} />
+                </div>
+              ) : null}
+            </div>
+          ) : null}
         </header>
       </div>
     );

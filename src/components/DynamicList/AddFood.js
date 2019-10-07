@@ -14,26 +14,21 @@ class AddFood extends Component {
   render() {
     const { onoffShowFood } = this.props;
     const { visible } = this.state;
-    
+
     return (
       <div>
         {visible ? (
           <button
             className="Button"
             onClick={() => {
-              onoffShowFood();
               this.handleOnOffAddfood();
-              
+              onoffShowFood();
             }}
           >
             Add new food
           </button>
         ) : null}
-
-        <FormAddFood
-          visibleButton={this.handleOnOffButton}
-          visibleFoodSearched={onoffShowFood}
-         />
+        {!visible ? <FormAddFood onoffShowFood={onoffShowFood} /> : null}
       </div>
     );
   }

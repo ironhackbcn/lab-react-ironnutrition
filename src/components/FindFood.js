@@ -6,14 +6,14 @@ class FindFood extends Component {
     visible: true
   };
 
-  hanleOnOffJumbotron= () =>  {
+  hanleOnOffJumbotron = () => {
     const { visible } = this.state;
     this.setState({ visible: !visible });
-  }
-  
+  };
+
   render() {
-    const { valueForm, myFunction, visible } = this.props;
-    return visible ? (
+    const { valueForm, myFunction} = this.props;
+    return (
       <div className="App-Input">
         <label>Search</label>
         <div className="App-Input">
@@ -26,7 +26,7 @@ class FindFood extends Component {
           ></input>
         </div>
       </div>
-    ) : null;
+    );
   }
 }
 
