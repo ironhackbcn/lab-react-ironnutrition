@@ -13,6 +13,7 @@ class App extends Component {
     foods: [...foods],
     searchFoods: [...foods],
     todaysFoods: [],
+    searchName: '',
     // showForm: false,
   };
   // handleShowForm = () => {
@@ -20,24 +21,25 @@ class App extends Component {
   //     showForm: !this.state.showForm,
   //   });
   // };
-  handleNewFood = food => {
-    this.setState(
+  handleNewFood = async food => {
+    await this.setState(
       {
         foods: [food, ...this.state.foods],
-        searchFoods: [food, ...this.state.foods],
+        // searchFoods: [food, ...this.state.foods],
       },
       () => {
         console.log('🤣', this.state.foods);
       },
     );
 
-    // this.handleSearch('');
+    this.handleSearch(this.state.searchName);
   };
 
   handleSearch = name => {
     console.log('TCL: handleSearch -> name', name);
     // console.log("Prueba");
     const { foods } = this.state;
+    this.setState({ searchName: name });
     const searchedFoods = foods.filter(food => {
       return food.name.toLowerCase().indexOf(name.toLowerCase()) !== -1;
     });
