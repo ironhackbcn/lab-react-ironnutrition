@@ -48,6 +48,15 @@ class App extends Component {
       foods: [updateFoods, ...foods]
     })
   }
+  handleSearch = event =>{
+    const { foods } = this.state;
+    const searchFood = foods.filter((food) =>{
+      return food.name.toLowerCase().indexOf(event.target.value.toLowerCase()) > -1;
+    })
+    this.setState({
+      foods: [...searchFood]
+    })
+  }
   render() {
     const { visibility } = this.state;
     return (
@@ -59,6 +68,10 @@ class App extends Component {
                <FormAddFood formSend={this.HandleAddFood}></FormAddFood> : null
               }
             </div>
+        </div>
+        <div className="search">
+          Search <input type="text" onChange={this.handleSearch}></input>
+
         </div>
         <div className="AllFoods">
             {this.listAllFoods()}
