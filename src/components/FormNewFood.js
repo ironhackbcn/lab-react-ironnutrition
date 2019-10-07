@@ -13,27 +13,30 @@ class FormNewFood extends Component {
     };
     // this.handleNewFood = this.handleNewFood.bind(this);
   }
-
-  handleNameInput = event => {
-    this.setState({
-      name: event.target.value,
-    });
+  handleChange = event => {
+    const { name, value } = event.target;
+    this.setState({ [name]: value });
   };
-  handleCaloriesInput = event => {
-    this.setState({
-      calories: event.target.value,
-    });
-  };
-  handleQuantityInput = event => {
-    this.setState({
-      quantity: event.target.value,
-    });
-  };
-  handleImageInput = event => {
-    this.setState({
-      image: event.target.value,
-    });
-  };
+  // handleNameInput = event => {
+  //   this.setState({
+  //     name: event.target.value,
+  //   });
+  // };
+  // handleCaloriesInput = event => {
+  //   this.setState({
+  //     calories: event.target.value,
+  //   });
+  // };
+  // handleQuantityInput = event => {
+  //   this.setState({
+  //     quantity: event.target.value,
+  //   });
+  // };
+  // handleImageInput = event => {
+  //   this.setState({
+  //     image: event.target.value,
+  //   });
+  // };
 
   handleFormSubmit = event => {
     // const { handleShowForm } = this.props;
@@ -68,7 +71,8 @@ class FormNewFood extends Component {
                 type="text"
                 name="name"
                 value={this.state.name}
-                onChange={e => this.handleNameInput(e)}
+                // onChange={e => this.handleNameInput(e)}
+                onChange={e => this.handleChange(e)}
               />
               <br></br>
               <label>New Food calories:</label>
@@ -76,7 +80,8 @@ class FormNewFood extends Component {
                 type="number"
                 name="calories"
                 value={this.state.calories}
-                onChange={e => this.handleCaloriesInput(e)}
+                // onChange={e => this.handleCaloriesInput(e)}
+                onChange={e => this.handleChange(e)}
               />
               <br></br>
               <label>New Food quantity:</label>
@@ -84,7 +89,8 @@ class FormNewFood extends Component {
                 type="number"
                 name="quantity"
                 value={this.state.quantity}
-                onChange={e => this.handleQuantityInput(e)}
+                // onChange={e => this.handleQuantityInput(e)}
+                onChange={e => this.handleChange(e)}
               />
               <br></br>
               <label>New Food picture:</label>
@@ -92,7 +98,8 @@ class FormNewFood extends Component {
                 type="text"
                 name="image"
                 value={this.state.image}
-                onChange={e => this.handleImageInput(e)}
+                // onChange={e => this.handleImageInput(e)}
+                onChange={e => this.handleChange(e)}
               />
               <br></br>
               <input type="submit" value="Submit" />
