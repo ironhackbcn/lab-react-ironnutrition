@@ -5,13 +5,16 @@ class AddFood extends Component {
   state = {
     visible: true
   };
-  handleOnOffButton = () => {
+
+  handleOnOffAddfood = () => {
     const { visible } = this.state;
     this.setState({ visible: !visible });
   };
+
   render() {
-    const { onoffShowFood} = this.props;
-    const { visible}= this.state;
+    const { onoffShowFood } = this.props;
+    const { visible } = this.state;
+    
     return (
       <div>
         {visible ? (
@@ -19,14 +22,18 @@ class AddFood extends Component {
             className="Button"
             onClick={() => {
               onoffShowFood();
-              this.handleOnOffButton();
+              this.handleOnOffAddfood();
+              
             }}
           >
             Add new food
           </button>
         ) : null}
-        {!visible ?
-        <FormAddFood visibleButton={this.handleOnOffButton}/> : null}
+
+        <FormAddFood
+          visibleButton={this.handleOnOffButton}
+          visibleFoodSearched={onoffShowFood}
+         />
       </div>
     );
   }

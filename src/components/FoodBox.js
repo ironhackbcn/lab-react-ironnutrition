@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 
 class FoodBox extends Component {
+  state={
+    visible: true,
+  }
   render() {
     const { name, image, calories } = this.props;
     return (

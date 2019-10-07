@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
 import foods from "./data/foods.json";
-import Jumbotron from "./components/Jumbotron";
+import FindFood from "./components/FindFood";
 import SearchedFood from "./components/SearchedFood";
 import AddFood from "./components/DynamicList/AddFood";
 
@@ -9,7 +9,7 @@ class App extends Component {
   state = {
     allFood: [...foods],
     searchedFood: [...foods],
-    form: " ",
+    form: "",
     visible: true
   };
 
@@ -39,19 +39,15 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <h1 className="App-h1">IronNutrition</h1>
-          {/*Component that show a form to add a new food */}
-          <AddFood 
-            onoffShowFood={this.HandleHideShowFood}
-            // onoffShowForm={this.HandlehideShowForm}
-          />
-          {/* a Component to find food */}
-          <Jumbotron
-            myFunction={this.HandleSearch}
-            valueForm={form}
-            visible={visible}
-          />
-          {/* Component that show the food searched */}
-          {visible ? <SearchedFood sfood={searchedFood} /> : null}
+
+         {/*This is form and button component */}
+         {visible ? <div>
+          <AddFood onoffShowFood={this.HandleHideShowFood} />
+          {/* This is a Search Food Bar*/}
+          <FindFood myFunction={this.HandleSearch} valueForm={form} />
+          {/*This is a Searched Food Map */}
+          <SearchedFood sfood={searchedFood} />
+          </div> : null}
         </header>
       </div>
     );

@@ -1,6 +1,16 @@
 import React, { Component } from "react";
 
-class Jumbotron extends Component {
+class FindFood extends Component {
+  /* This function search a food  */
+  state = {
+    visible: true
+  };
+
+  hanleOnOffJumbotron= () =>  {
+    const { visible } = this.state;
+    this.setState({ visible: !visible });
+  }
+  
   render() {
     const { valueForm, myFunction, visible } = this.props;
     return visible ? (
@@ -20,4 +30,4 @@ class Jumbotron extends Component {
   }
 }
 
-export default Jumbotron;
+export default FindFood;

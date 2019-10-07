@@ -5,32 +5,41 @@ class FormAddFood extends Component {
     name: "",
     calories: 0,
     image: "/images/default.png",
-    quantity: 0
+    quantity: 0,
+    visible:false,
   };
 
+  handleOnOffFormShow=() => {
+    const {visible} = this.state;
+    this.setState({visible:!visible});
+  }
   render() {
-    const { name, calories, image, quantity} = this.state;
-    const {visibleButton} = this.props;
+    const { name, calories, image, quantity, visible } = this.state;
+    const { visibleFoodSearched, visibleForm } = this.props;
+
     return (
       <div>
-        <form onSubmit={this.handlerFormSubmit}>
+        {visibleForm ? this.handleOnOffFormShow() : null }
+        {visible ? 
+        ( <form onSubmit={this.handlerFormSubmit}>
           <label for="name">Name:</label>
           <input type="text" name="name" value={name} />
           <label for="calories">Calories:</label>
           <input type="number" name="calories" value={calories} />
           <label for="image">Image:</label>
           <input type="text" name="image" value="" placeholder="...Url" />
-          {/* Here is the image of a food or by default a standard photo */}
-          <img src={image} alt="food" />
+           <img src={image} alt="food" />
           <label for="quantity">Quantity:</label>
           <input type="number" name="quantity" value={quantity} />
           <div>
-          <input type="submit" value="Add"/>
-          <input type="button" onclick={()=>{visibleButton()}} value="Back w/o Add"/>
+            <input type="submit" value="Add" />
+          </div>
+          <div>
+          <button onClick={() => {visibleFoodSearched()}} value="Back w/o Add" />
           </div>
         </form>
-      </div>
-    );
+         ) : null }
+      </div>);
   }
 }
 
