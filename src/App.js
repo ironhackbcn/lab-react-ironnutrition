@@ -13,13 +13,13 @@ class App extends Component {
     foods: [...foods],
     searchFoods: [...foods],
     todaysFoods: [],
-    showForm: false,
+    // showForm: false,
   };
-  handleShowForm = () => {
-    this.setState({
-      showForm: !this.state.showForm,
-    });
-  };
+  // handleShowForm = () => {
+  //   this.setState({
+  //     showForm: !this.state.showForm,
+  //   });
+  // };
   handleNewFood = food => {
     this.setState(
       {
@@ -95,16 +95,10 @@ class App extends Component {
       <div className="App">
         {/* <Button >New Food</Button> */}
 
-        <button className="add-newFood" onClick={this.handleShowForm}>
-          New Food
-        </button>
-
-        {showForm && (
-          <FormNewFood
-            handleNewFood={this.handleNewFood}
-            handleShowForm={this.handleShowForm}
-          ></FormNewFood>
-        )}
+        <FormNewFood
+          handleNewFood={this.handleNewFood}
+          handleShowForm={this.handleShowForm}
+        ></FormNewFood>
 
         <Search handleSearch={this.handleSearch}></Search>
         <div className="columns">
