@@ -12,7 +12,7 @@ class AddFood extends Component {
   };
 
   render() {
-    const { onoffShowFood } = this.props;
+    const { OnOffvisibleSearchNFindFood, onoffShowAll } = this.props;
     const { visible } = this.state;
 
     return (
@@ -22,13 +22,13 @@ class AddFood extends Component {
             className="Button"
             onClick={() => {
               this.handleOnOffAddfood();
-              onoffShowFood();
+              OnOffvisibleSearchNFindFood();
             }}
           >
             Add new food
           </button>
         ) : null}
-        {!visible ? <FormAddFood onoffShowFood={onoffShowFood} /> : null}
+        {!visible ? <FormAddFood OnOffvisibleSearchNFindFood={OnOffvisibleSearchNFindFood} onoffShowAll={onoffShowAll} OnOffAddfood={this.handleOnOffAddfood} /> : null}
       </div>
     );
   }

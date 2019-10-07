@@ -32,7 +32,7 @@ class App extends Component {
       this.setState({ searchedFood: [...allFood], form: "" });
     } else {
       const newState = [...allFood].filter(food => {
-        return food.name.toLowerCase().includes(form.toString().toLowerCase());
+        return food.name.toLowerCase().index(form.toString().toLowerCase());
       });
       this.setState({ searchedFood: [...newState] });
     }
@@ -49,7 +49,7 @@ class App extends Component {
           {/*This is form and button component */}
           {visible ? (
             <div>
-              <AddFood onoffShowFood={this.handleOnOffvisibleSearchNFindFood} />
+              <AddFood OnOffvisibleSearchNFindFood={this.handleOnOffvisibleSearchNFindFood} onoffShowAll={this.handleHideShowFood} />
               {/* This is a Search Food Bar*/}
               {visibleSearchNFindFood ? (
                 <div>
