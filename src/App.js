@@ -7,7 +7,7 @@ import AddFood from "./components/DynamicList/AddFood";
 
 class App extends Component {
   state = {
-    allFood: [...foods],
+    F: [...foods],
     searchedFood: [...foods],
     form: "",
     visible: true,
@@ -24,7 +24,7 @@ class App extends Component {
     this.setState({ visibleSearchNFindFood: !visibleSearchNFindFood });
   };
 
-  HandleSearch = value => {
+  handleSearch = value => {
     console.log(value);
     const { allFood, form } = this.state;
     this.setState({ form: value });
@@ -38,6 +38,12 @@ class App extends Component {
     }
   };
 
+  handleAddFood = (food) => {
+    const allFoodCopy = [...this.state.allFood];
+    allFoodCopy.push(food);
+    this.setState({allFood: [...allFoodCopy]});
+  }
+
   render() {
     const { form, searchedFood, visible, visibleSearchNFindFood } = this.state;
 
@@ -49,11 +55,11 @@ class App extends Component {
           {/*This is form and button component */}
           {visible ? (
             <div>
-              <AddFood OnOffvisibleSearchNFindFood={this.handleOnOffvisibleSearchNFindFood} onoffShowAll={this.handleHideShowFood} />
+              <AddFood OnOffvisibleSearchNFindFood={this.handleOnOffvisibleSearchNFindFood} onoffShowAll={this.handleHideShowFood} handleAddFood={this.handleAddFood} />
               {/* This is a Search Food Bar*/}
               {visibleSearchNFindFood ? (
                 <div>
-                  <FindFood myFunction={this.HandleSearch} valueForm={form} />
+                  <FindFood myFunction={this.handleSearch} valueForm={form} />
                   {/*This is a Searched Food Map */}
                   <SearchedFood sfood={searchedFood} />
                 </div>
