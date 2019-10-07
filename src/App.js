@@ -39,13 +39,13 @@ class App extends Component {
     console.log('TCL: handleSearch -> name', name);
     // console.log("Prueba");
     const { foods } = this.state;
-    this.setState({ searchName: name });
+    // this.setState({ searchName: name });
     const searchedFoods = foods.filter(food => {
       return food.name.toLowerCase().indexOf(name.toLowerCase()) !== -1;
     });
     console.log('TCL: searchedFoods', searchedFoods);
 
-    this.setState({ searchFoods: [...searchedFoods] });
+    this.setState({ searchFoods: [...searchedFoods], searchName: name });
   };
 
   handleAddTodayFood = food => {
