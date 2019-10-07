@@ -9,14 +9,14 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: white;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: black;
   padding:10px;
 }
 
@@ -27,12 +27,32 @@
 
 .App-h1{
   margin:10px;
+  font-weight:bolder;
 }
+
 
 .App-Input {
   margin: 25px;
   width: 100%;
+  display:flex;
+  flex-direction: arrow;
+  justify-content:flex-start;
 }
+.App-Input input{
+  margin:0 500px 0 25px ;
+  width:100%;
+  border-radius:10px;
+  text-align:right;
+}
+label{margin-right: 50px;}
+
+.Button{
+  padding:20px 50px;
+  font-weight: bolder;  
+  color:White;
+  background:navy;
+  border-radius:10px;
+ }
 
 @keyframes App-logo-spin {
   from {
