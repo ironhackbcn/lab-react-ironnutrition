@@ -22,19 +22,17 @@ class FoodBox extends Component {
         { name: name, quantity: quantity, calories: calories },
         () => {
           this.props.AddFoodToday(this.state);
-          console.log(this.state);
         }
       );
     }
   };
 
-  manageDeleteFood=()=>{
-    console.log(this.props.index);
+  manageDeleteFood = () => {
     this.props.DeleteFood(this.props.index);
-  }
+  };
 
   render() {
-    const { name, image, calories, } = this.props;
+    const { name, image, calories } = this.props;
     return (
       <div className="box">
         <article className="media">
@@ -70,7 +68,8 @@ class FoodBox extends Component {
                 </button>
                 <button
                   className="button"
-                  style={{ color: "white", background: "tomato" }} onClick={this.manageDeleteFood}
+                  style={{ color: "white", background: "tomato" }}
+                  onClick={this.manageDeleteFood}
                 >
                   X
                 </button>

@@ -33,8 +33,7 @@ class FormAddFood extends Component {
 
     return (
       <div>
-        <form
-          onSubmit={this.handlerFormSubmit}>
+        <form onSubmit={this.handlerFormSubmit}>
           <label>Name:</label>
           <input
             type="text"

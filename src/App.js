@@ -16,14 +16,20 @@ class App extends Component {
     visibleSearchNFindFood: true
   };
 
-  handleDeleteFood= (index) =>{
-    console.log(index);
-    const {allFood, todayFood} = this.state;
+  handleDeleteFood = index => {
+    const { allFood, todayFood } = this.state;
     const name = allFood[index].name;
-    allFood.splice(index,1);
-    this.setState({allFood:[...allFood]});
-    todayFood.slice(todayFood.map((tfood)=>{return tfood.name}).indexOf(name),1);
-  }
+    allFood.splice(index, 1);
+    this.setState({ allFood: [...allFood], searchedFood: [...allFood] });
+    todayFood.splice(
+      todayFood
+        .map(tfood => {
+          return tfood.name;
+        })
+        .indexOf(name),
+      1
+    );
+  };
 
   handleHideShowFood = () => {
     const { visible } = this.state;
@@ -57,19 +63,15 @@ class App extends Component {
 
   handleAddFoodToday = food => {
     let { todayFood } = this.state;
-    console.log(food.name);
     const pos = todayFood
       .map(tfood => {
         return tfood.name;
       })
       .indexOf(food.name);
-    console.log(pos);
     if (pos >= 0) {
-      console.log("existe");
       todayFood[pos].quantity += parseInt(food.quantity);
       this.setState({ todayFood: [...todayFood] });
     } else {
-      console.log("es nueva");
       const newFood = {
         name: food.name,
         quantity: parseInt(food.quantity),
@@ -100,7 +102,7 @@ class App extends Component {
 
               {visibleSearchNFindFood ? (
                 <div>
-                  <div>
+                  <div className="search-bar">
                     <FindFood myFunction={this.handleSearch} valueForm={form} />
                   </div>
 
@@ -109,7 +111,8 @@ class App extends Component {
                       {/*This is a Searched Food Map */}
                       <SearchedFood
                         sfood={searchedFood}
-                        AddFoodToday={this.handleAddFoodToday} DeleteFood={this.handleDeleteFood}
+                        AddFoodToday={this.handleAddFoodToday}
+                        DeleteFood={this.handleDeleteFood}
                       />
                     </div>
                     <div className="todayfood">

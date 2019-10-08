@@ -12,12 +12,11 @@ class FindFood extends Component {
   };
 
   render() {
-    const { valueForm, myFunction} = this.props;
+    const { valueForm, myFunction } = this.props;
     return (
       <div className="App-Input">
-        
         <div className="App-Input">
-        <label>Search</label>
+          <label>Search</label>
           <input
             type="text"
             onChange={event => {

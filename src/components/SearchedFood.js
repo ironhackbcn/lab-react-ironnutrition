@@ -8,21 +8,23 @@ class SearchedFood extends Component {
     const { visible } = this.state;
     this.setState({ visible: !visible });
   };
-  
+
   render() {
-    const { sfood, AddFoodToday, DeleteFood} = this.props;
-    
+    const { sfood, AddFoodToday, DeleteFood } = this.props;
+
     return (
-      <div>
+      <div style={{ margin: 10 }}>
         {sfood.map((food, index) => {
           return (
-            <div key={`${index}`}>
-              <FoodBox sfoodUnits={sfood.length}
+            <div className="box-wrapper" key={`${index}`}>
+              <FoodBox
+                sfoodUnits={sfood.length}
                 name={food.name}
                 image={food.image}
                 calories={food.calories}
-                AddFoodToday={AddFoodToday} 
-                index={index} DeleteFood={DeleteFood}
+                AddFoodToday={AddFoodToday}
+                index={index}
+                DeleteFood={DeleteFood}
               />
             </div>
           );
