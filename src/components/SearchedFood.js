@@ -10,7 +10,7 @@ class SearchedFood extends Component {
   };
   
   render() {
-    const { sfood, AddFoodToday} = this.props;
+    const { sfood, AddFoodToday, DeleteFood} = this.props;
     
     return (
       <div>
@@ -21,7 +21,8 @@ class SearchedFood extends Component {
                 name={food.name}
                 image={food.image}
                 calories={food.calories}
-                AddFoodToday={AddFoodToday}
+                AddFoodToday={AddFoodToday} 
+                index={index} DeleteFood={DeleteFood}
               />
             </div>
           );

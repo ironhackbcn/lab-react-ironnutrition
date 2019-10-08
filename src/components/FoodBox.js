@@ -15,15 +15,26 @@ class FoodBox extends Component {
 
   AddingFoodToday = () => {
     if (this.state.quantity > 0) {
-      const {quantity} = this.state;
-      const {name} = this.props;
-      const {calories} = this.props;
-      this.setState({ name: name, quantity: quantity, calories: calories },()=>{this.props.AddFoodToday(this.state);console.log(this.state)});
-         }
+      const { quantity } = this.state;
+      const { name } = this.props;
+      const { calories } = this.props;
+      this.setState(
+        { name: name, quantity: quantity, calories: calories },
+        () => {
+          this.props.AddFoodToday(this.state);
+          console.log(this.state);
+        }
+      );
+    }
   };
 
+  manageDeleteFood=()=>{
+    console.log(this.props.index);
+    this.props.DeleteFood(this.props.index);
+  }
+
   render() {
-    const { name, image, calories } = this.props;
+    const { name, image, calories, } = this.props;
     return (
       <div className="box">
         <article className="media">
@@ -56,6 +67,12 @@ class FoodBox extends Component {
                   onClick={this.AddingFoodToday}
                 >
                   +
+                </button>
+                <button
+                  className="button"
+                  style={{ color: "white", background: "tomato" }} onClick={this.manageDeleteFood}
+                >
+                  X
                 </button>
               </div>
             </div>

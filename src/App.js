@@ -16,6 +16,15 @@ class App extends Component {
     visibleSearchNFindFood: true
   };
 
+  handleDeleteFood= (index) =>{
+    console.log(index);
+    const {allFood, todayFood} = this.state;
+    const name = allFood[index].name;
+    allFood.splice(index,1);
+    this.setState({allFood:[...allFood]});
+    todayFood.slice(todayFood.map((tfood)=>{return tfood.name}).indexOf(name),1);
+  }
+
   handleHideShowFood = () => {
     const { visible } = this.state;
     this.setState({ visible: !visible });
@@ -46,21 +55,29 @@ class App extends Component {
     this.setState({ allFood: [...allFoodCopy] });
   };
 
-  handleAddFoodToday = (food) => {
-    const {todayFood} = this.state;
-    const newFood = {name: food.name, quantity: parseInt(food.quantity), calories: food.calories}
-    this.setState({todayFood: [newFood, ...todayFood]});
-    console.log('hello',this.state.todayFood)
-  }
- 
-  handleCalories= ()=>{
-    const {todayFood} = this.state;
-    return todayFood.reduce((caloriesA,CaloriesB)=>{
-      console.log (caloriesA.calories)
-      return caloriesA.calories + CaloriesB.calories*CaloriesB.quantity;
-     
-    },0);
-  }
+  handleAddFoodToday = food => {
+    let { todayFood } = this.state;
+    console.log(food.name);
+    const pos = todayFood
+      .map(tfood => {
+        return tfood.name;
+      })
+      .indexOf(food.name);
+    console.log(pos);
+    if (pos >= 0) {
+      console.log("existe");
+      todayFood[pos].quantity += parseInt(food.quantity);
+      this.setState({ todayFood: [...todayFood] });
+    } else {
+      console.log("es nueva");
+      const newFood = {
+        name: food.name,
+        quantity: parseInt(food.quantity),
+        calories: food.calories
+      };
+      this.setState({ todayFood: [newFood, ...todayFood] });
+    }
+  };
 
   render() {
     const { form, searchedFood, visible, visibleSearchNFindFood } = this.state;
@@ -80,30 +97,29 @@ class App extends Component {
                 handleAddFood={this.handleAddFood}
               />
               {/* This is a Search Food Bar*/}
-              
+
               {visibleSearchNFindFood ? (
                 <div>
-
-                <div>
-                <FindFood myFunction={this.handleSearch} valueForm={form} />
-                </div>
-
-                <div className="listfood">
-                  <div className="findfood-searched">
-                    
-                    {/*This is a Searched Food Map */}
-                    <SearchedFood sfood={searchedFood}  AddFoodToday={this.handleAddFoodToday} />
+                  <div>
+                    <FindFood myFunction={this.handleSearch} valueForm={form} />
                   </div>
-                  <div className="todayfood">
-                    <TodayFood
-                      todayFood={this.state.todayFood} totalCalories={this.handleCalories}
-                    />
+
+                  <div className="listfood">
+                    <div className="findfood-searched">
+                      {/*This is a Searched Food Map */}
+                      <SearchedFood
+                        sfood={searchedFood}
+                        AddFoodToday={this.handleAddFoodToday} DeleteFood={this.handleDeleteFood}
+                      />
+                    </div>
+                    <div className="todayfood">
+                      <TodayFood todayFood={this.state.todayFood} />
+                    </div>
                   </div>
                 </div>
-
-             </div> ) : null}
-            
-         </div> ) : null}
+              ) : null}
+            </div>
+          ) : null}
         </header>
       </div>
     );
