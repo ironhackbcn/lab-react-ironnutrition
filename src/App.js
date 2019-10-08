@@ -47,26 +47,20 @@ class App extends Component {
   };
 
   handleAddFoodToday = (food) => {
-    
-   const {todayFood} = this.state;
-   console.log('food', food.name)
-   console.log('todayFood.length', todayFood.length)
-    if (todayFood.length>0){
-       const pos = todayFood.filter(food.name);
-       console.log('pos', pos[0]);
-
-       if (pos) { 
-         console.log('pos', pos)
-         const newState = [...todayFood];
-         newState[pos[0]]=newState.quantity+food.quantity;
-         this.setState({todayFood: [...newState]});
-       }
-       else {this.setState({todayFood: [...this.state.todayFood,food]});}
-    }
-    else{
-    this.setState({todayFood: [...this.state.todayFood,food]});
+    const {todayFood} = this.state;
+    const newFood = {name: food.name, quantity: parseInt(food.quantity), calories: food.calories}
+    this.setState({todayFood: [newFood, ...todayFood]});
+    console.log('hello',this.state.todayFood)
   }
-  };
+ 
+  handleCalories= ()=>{
+    const {todayFood} = this.state;
+    return todayFood.reduce((caloriesA,CaloriesB)=>{
+      console.log (caloriesA.calories)
+      return caloriesA.calories + CaloriesB.calories*CaloriesB.quantity;
+     
+    },0);
+  }
 
   render() {
     const { form, searchedFood, visible, visibleSearchNFindFood } = this.state;
@@ -102,8 +96,7 @@ class App extends Component {
                   </div>
                   <div className="todayfood">
                     <TodayFood
-                      todayFood={this.state.todayFood}
-                      
+                      todayFood={this.state.todayFood} totalCalories={this.handleCalories}
                     />
                   </div>
                 </div>

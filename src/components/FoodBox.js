@@ -15,10 +15,11 @@ class FoodBox extends Component {
 
   AddingFoodToday = () => {
     if (this.state.quantity > 0) {
-      const newQ = this.state.quantity;
-      console.log('name',this.props.name);
-      this.setState({ name: this.props.name,quantity: newQ,calories: this.props.calories},()=>{this.props.AddFoodToday(this.state);});
-   }
+      const {quantity} = this.state;
+      const {name} = this.props;
+      const {calories} = this.props;
+      this.setState({ name: name, quantity: quantity, calories: calories },()=>{this.props.AddFoodToday(this.state);console.log(this.state)});
+         }
   };
 
   render() {
