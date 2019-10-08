@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import foods from '../data/foods.json'
 
-class ListFood extends Component {
+class FoodBox extends Component {
 
   state = {
     quantityFood: 1
@@ -13,8 +13,10 @@ class ListFood extends Component {
       quantityFood: updateQuantity
     });
   }
+
   render() {
-    const {name, image, calories, index, quantity} = this.props;
+    const {name, image, calories, index, quantity, listFoods} = this.props;
+    const { quantityFood } = this.state;
     return (
       <div className="box">
       <article className="media">
@@ -42,7 +44,7 @@ class ListFood extends Component {
               />
             </div>
             <div className="control">
-              <button className="button is-info">
+              <button className="button is-info" onClick={() => {listFoods(name, calories, quantityFood )}}>
                 +
               </button>
             </div>
@@ -54,4 +56,4 @@ class ListFood extends Component {
   }
 }
 
-export default ListFood;
+export default FoodBox;

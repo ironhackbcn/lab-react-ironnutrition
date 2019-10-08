@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import foods from '../data/foods.json'
 
-class App extends Component {
+class FormAddFood extends Component {
     state = {
         name: "name",
         calories: "calories",
@@ -29,4 +29,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default FormAddFood;
