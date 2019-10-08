@@ -47,14 +47,18 @@ class App extends Component {
   };
 
   handleAddFoodToday = (food) => {
-    console.log('food', food)
-    const {todayFood} = this.state;
+    
+   const {todayFood} = this.state;
+   console.log('food', food.name)
+   console.log('todayFood.length', todayFood.length)
     if (todayFood.length>0){
        const pos = todayFood.filter(food.name);
+       console.log('pos', pos[0]);
+
        if (pos) { 
          console.log('pos', pos)
          const newState = [...todayFood];
-         newState[pos]=newState.quantity+food.quantity;
+         newState[pos[0]]=newState.quantity+food.quantity;
          this.setState({todayFood: [...newState]});
        }
        else {this.setState({todayFood: [...this.state.todayFood,food]});}
