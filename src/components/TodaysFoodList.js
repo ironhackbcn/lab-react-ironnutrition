@@ -6,7 +6,7 @@ export default class TodaysFoodList extends Component {
 
     return (
       <div>
-        <h2>Today's foods</h2>
+        <h2>Todays foods</h2>
         <ul>
           <li>{name}</li>
         </ul>

@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
 
 export default class SearchBar extends Component {
-  state = {
-    searchBar: '',
-  };
-
   handleChange = e => {
     this.props.searchBar(e.target.value);
   };

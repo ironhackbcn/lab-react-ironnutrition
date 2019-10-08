@@ -56,7 +56,7 @@ export default class AddNewFood extends Component {
             type="text"
             name="name"
             value={this.state.name}
-            onChange={e => this.handleNameInput(e)}
+            onChange={this.handleNameInput}
           />
           <br />
           <label>Food Calories:</label>
@@ -64,7 +64,7 @@ export default class AddNewFood extends Component {
             type="text"
             name="calories"
             value={this.state.calories}
-            onChange={e => this.handleCaloriesInput(e)}
+            onChange={this.handleCaloriesInput}
           />
           <br />
           <label>Food Quantity:</label>
@@ -72,7 +72,7 @@ export default class AddNewFood extends Component {
             type="text"
             name="quantity"
             value={this.state.quantity}
-            onChange={e => this.handleQuantityInput(e)}
+            onChange={this.handleQuantityInput}
           />
           <br />
           <label>Food Image:</label>
@@ -80,7 +80,7 @@ export default class AddNewFood extends Component {
             type="text"
             name="image"
             value={this.state.image}
-            onChange={e => this.handleImageInput(e)}
+            onChange={this.handleImageInput}
           />
           <br />
           <input type="submit" value="Submit" />

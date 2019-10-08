@@ -30,7 +30,7 @@ class App extends Component {
     });
   };
 
-  AddNewFood = food => {
+  addNewFood = food => {
     this.setState({
       foods: [...this.state.foods, food],
     });
@@ -49,7 +49,7 @@ class App extends Component {
 
   /*ITERATION 5 FUNCTION*/
   addFoodToList = food => {
-    this.state.foods.push(food, 1);
+    this.state.foods.push(food);
     this.setState({
       todaysFoodList: [...this.state.todaysFoodList, food],
     });
@@ -65,7 +65,7 @@ class App extends Component {
           <button className="add-new-food-btn" onClick={this.showForm}>
             Add food
           </button>
-          {this.state.showForm && <AddNewFood addNew={this.AddNewFood} />}
+          {this.state.showForm && <AddNewFood addNew={this.addNewFood} />}
         </div>
         {this.state.foods.map((food, index) => {
           return (
