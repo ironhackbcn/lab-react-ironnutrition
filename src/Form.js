@@ -8,31 +8,27 @@ class FoodForm extends Component {
     calories: 545,
   }
 
-  handleFoodInput = (event) => {
+  handleFoodInput = event => {
     this.setState({
       name: event.target.value,
-    })
-    console.log(this.state.name);
+    });
   }
 
-  handleImageInput = (event) => {
+  handleImageInput = event => {
     this.setState({
       image: event.target.value,
     })
-    console.log(this.state.image);
   }
 
   handleCaloriesInput = (event) => {
     this.setState({
       calories: event.target.value,
     })
-    console.log(this.state.calories);
   }
 
   handleFormSubmit = (e) => {
     e.preventDefault()
     this.props.submit(this.state)
-    console.log("Sending data ", this.state);
   }
 
   render() {

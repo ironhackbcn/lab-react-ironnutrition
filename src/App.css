@@ -33,6 +33,14 @@ h1 {
   padding: 0;
   max-width: 400px;
 }
+
+.right-side {
+  margin-left: 10px;
+}
+
+.calc {
+  margin-left: 20px;
+}
     
     .box .media {
       -ms-flex-align: center;
