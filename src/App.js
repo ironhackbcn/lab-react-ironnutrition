@@ -4,11 +4,13 @@ import foods from "./data/foods.json";
 import FindFood from "./components/FindFood";
 import SearchedFood from "./components/SearchedFood";
 import AddFood from "./components/DynamicList/AddFood";
+import TodayFood from "./components/TodayFood";
 
 class App extends Component {
   state = {
-    F: [...foods],
+    allFood: [...foods],
     searchedFood: [...foods],
+    todayFood: [],
     form: "",
     visible: true,
     visibleSearchNFindFood: true
@@ -25,24 +27,42 @@ class App extends Component {
   };
 
   handleSearch = value => {
-    console.log(value);
-    const { allFood, form } = this.state;
-    this.setState({ form: value });
-    if (form === "") {
-      this.setState({ searchedFood: [...allFood], form: "" });
+    const { allFood } = this.state;
+    if (value === "") {
+      this.setState({ searchedFood: [...allFood] });
+      this.setState({ form: "" });
     } else {
       const newState = [...allFood].filter(food => {
-        return food.name.toLowerCase().index(form.toString().toLowerCase());
+        return food.name.toLowerCase().indexOf(value.toLowerCase()) !== -1; //avoid the return position -1 not matches
       });
       this.setState({ searchedFood: [...newState] });
+      this.setState({ form: value });
     }
   };
 
-  handleAddFood = (food) => {
+  handleAddFood = food => {
     const allFoodCopy = [...this.state.allFood];
     allFoodCopy.push(food);
-    this.setState({allFood: [...allFoodCopy]});
+    this.setState({ allFood: [...allFoodCopy] });
+  };
+
+  handleAddFoodToday = (food) => {
+    console.log('food', food)
+    const {todayFood} = this.state;
+    if (todayFood.length>0){
+       const pos = todayFood.filter(food.name);
+       if (pos) { 
+         console.log('pos', pos)
+         const newState = [...todayFood];
+         newState[pos]=newState.quantity+food.quantity;
+         this.setState({todayFood: [...newState]});
+       }
+       else {this.setState({todayFood: [...this.state.todayFood,food]});}
+    }
+    else{
+    this.setState({todayFood: [...this.state.todayFood,food]});
   }
+  };
 
   render() {
     const { form, searchedFood, visible, visibleSearchNFindFood } = this.state;
@@ -51,21 +71,42 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <h1 className="App-h1">IronNutrition</h1>
-
           {/*This is form and button component */}
           {visible ? (
-            <div>
-              <AddFood OnOffvisibleSearchNFindFood={this.handleOnOffvisibleSearchNFindFood} onoffShowAll={this.handleHideShowFood} handleAddFood={this.handleAddFood} />
+            <div className="all-food">
+              <AddFood
+                OnOffvisibleSearchNFindFood={
+                  this.handleOnOffvisibleSearchNFindFood
+                }
+                onoffShowAll={this.handleHideShowFood}
+                handleAddFood={this.handleAddFood}
+              />
               {/* This is a Search Food Bar*/}
+              
               {visibleSearchNFindFood ? (
                 <div>
-                  <FindFood myFunction={this.handleSearch} valueForm={form} />
-                  {/*This is a Searched Food Map */}
-                  <SearchedFood sfood={searchedFood} />
+
+                <div>
+                <FindFood myFunction={this.handleSearch} valueForm={form} />
                 </div>
-              ) : null}
-            </div>
-          ) : null}
+
+                <div className="listfood">
+                  <div className="findfood-searched">
+                    
+                    {/*This is a Searched Food Map */}
+                    <SearchedFood sfood={searchedFood}  AddFoodToday={this.handleAddFoodToday} />
+                  </div>
+                  <div className="todayfood">
+                    <TodayFood
+                      todayFood={this.state.todayFood}
+                      
+                    />
+                  </div>
+                </div>
+
+             </div> ) : null}
+            
+         </div> ) : null}
         </header>
       </div>
     );

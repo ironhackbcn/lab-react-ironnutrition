@@ -39,8 +39,9 @@
   justify-content:flex-start;
 }
 .App-Input input{
-  margin:0 500px 0 25px ;
+  margin:0 50px 0 25px ;
   width:100%;
+  padding:10px;
   border-radius:10px;
   text-align:right;
 }
@@ -54,6 +55,21 @@ label{margin-right: 50px;}
   border-radius:10px;
  }
 
+ .listfood{
+   width:100%;
+   display:flex;
+   flex-direction: row;
+ }
+.findfood-searched{
+  width:45%;
+}
+.todayfood{
+  width:45%;
+}
+
+.all-food{
+  width:100%;
+}
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

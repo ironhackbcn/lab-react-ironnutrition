@@ -10,17 +10,18 @@ class SearchedFood extends Component {
   };
   
   render() {
-    const { sfood } = this.props;
+    const { sfood, AddFoodToday} = this.props;
     
     return (
       <div>
         {sfood.map((food, index) => {
           return (
             <div key={`${index}`}>
-              <FoodBox
+              <FoodBox sfoodUnits={sfood.length}
                 name={food.name}
                 image={food.image}
                 calories={food.calories}
+                AddFoodToday={AddFoodToday}
               />
             </div>
           );

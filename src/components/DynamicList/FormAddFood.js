@@ -8,83 +8,56 @@ class FormAddFood extends Component {
     quantity: 0
   };
 
-  handlerFormSubmit=(event) => {
+  handlerFormSubmit = event => {
     event.preventDefault();
-    this.props.handleAddFood (this.state);
+    this.props.handleAddFood(this.state);
     /* and reset */
-    this.setState({name: "",
-    calories: 0,
-    image: "/images/default.png",
-    quantity: 0});
+    this.setState({ name: "", calories: 0, image: "", quantity: 0 });
+    this.props.OnOffvisibleSearchNFindFood();
+    this.props.OnOffAddfood();
   };
-
-  
-
 
   handleOnOffFormShow = () => {
     const { visible } = this.state;
     this.setState({ visible: !visible });
   };
 
-  handleAddName = e => {
-    this.setState = { name: e.target.value };
-  };
-  handleAddCalories = e => {
-    this.setState = { calories: e.target.value };
-  };
-  handleAddImage = e => {
-    this.setState = { images: e.target.value };
-  };
-
-  handleAddQuantity = e => {
-    this.setState = { quantity: e.target.value };
-  };
+  handleChange(event) {
+    const { name, value } = event.target;
+    this.setState({ [name]: value });
+  }
 
   render() {
-    const { name, calories, image, quantity } = this.state;
-    const { OnOffvisibleSearchNFindFood, OnOffAddfood} = this.props;
+    const { name, calories, image } = this.state;
+    const { OnOffvisibleSearchNFindFood, OnOffAddfood } = this.props;
 
     return (
       <div>
-        <form onSubmit={this.handlerFormSubmit}>
+        <form
+          onSubmit={this.handlerFormSubmit}>
           <label>Name:</label>
           <input
             type="text"
             name="name"
             value={name}
-            onChange={e => 
-              this.handleAddName(e)
-            }
+            onChange={e => this.handleChange(e)}
           />
           <label>Calories:</label>
           <input
             type="number"
             name="calories"
             value={calories}
-            onChange={e => 
-              this.handleAddName(e)
-            }
+            onChange={e => this.handleChange(e)}
           />
           <label>Image:</label>
           <input
             type="text"
             name="image"
-            value=""
+            value={image}
             placeholder="...Url"
-            onChange={e => 
-              this.handleAddName(e)
-            }
+            onChange={e => this.handleChange(e)}
           />
-          <img src={image} alt="food" />
-          <label>Quantity:</label>
-          <input
-            type="number"
-            name="quantity"
-            value={quantity}
-            onChange={e => 
-              this.handleAddName(e)
-            }
-          />
+          <img src={image === "" ? "/images/default.png" : image} alt="food" />
           <div>
             <input className="Button" type="submit" value="Add" />
           </div>

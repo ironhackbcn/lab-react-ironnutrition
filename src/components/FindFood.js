@@ -15,8 +15,9 @@ class FindFood extends Component {
     const { valueForm, myFunction} = this.props;
     return (
       <div className="App-Input">
-        <label>Search</label>
+        
         <div className="App-Input">
+        <label>Search</label>
           <input
             type="text"
             onChange={event => {

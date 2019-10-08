@@ -1,9 +1,30 @@
 import React, { Component } from "react";
 
 class FoodBox extends Component {
-  state={
+  state = {
     visible: true,
-  }
+    name: "",
+    quantity: 0,
+    calories: 0
+  };
+
+  handleChangeQty = event => {
+    if (event.target.value >= 0)
+      this.setState({ quantity: event.target.value });
+  };
+
+  AddingFoodToday = () => {
+    if (this.state.quantity > 0) {
+      const { name } = this.props;
+      console.log("name", name);
+      this.setState({ name: "pepe" });
+      this.setState({ quantity: this.state.quantity });
+      this.setState({ calories: this.props.calories });
+      console.log("this.state", this.state);
+      this.props.AddFoodToday(this.state);
+    }
+  };
+
   render() {
     const { name, image, calories } = this.props;
     return (
@@ -11,7 +32,7 @@ class FoodBox extends Component {
         <article className="media">
           <div className="media-left">
             <figure className="image is-64x64">
-              <img src={image} alt={name}/>
+              <img src={image} alt={name} />
             </figure>
           </div>
           <div className="media-content">
@@ -25,10 +46,20 @@ class FoodBox extends Component {
           <div className="media-right">
             <div className="field has-addons">
               <div className="control">
-                <input className="input" type="number" /*value="1"*/ />
+                <input
+                  className="input"
+                  type="number"
+                  value={this.state.quantity}
+                  onChange={this.handleChangeQty}
+                />
               </div>
               <div className="control">
-                <button className="button is-info">+</button>
+                <button
+                  className="button is-info"
+                  onClick={this.AddingFoodToday}
+                >
+                  +
+                </button>
               </div>
             </div>
           </div>
