@@ -1,12 +1,12 @@
-import React, { Component } from "react";
-import logo from "./logo.svg";
-import "./App.css";
-import foods from "./data/foods.json";
-import FoodBox from "./components/FoodBox";
-import Button from "./components/Button";
-import FormNewFood from "./components/FormNewFood";
-import SearchName from "./components/SearchName";
-import ListFood from "./components/ListFood";
+import React, { Component } from 'react';
+import logo from './logo.svg';
+import './App.css';
+import foods from './data/foods.json';
+import FoodBox from './components/FoodBox';
+import Button from './components/Button';
+import FormNewFood from './components/FormNewFood';
+import SearchName from './components/SearchName';
+import ListFood from './components/ListFood';
 
 class App extends Component {
   state = {
@@ -41,7 +41,7 @@ class App extends Component {
         foodsState: [newFood, ...foodsState],
       },
       () => {
-        console.log("TCL: App -> handleAddFood -> foods", foodsState);
+        console.log('TCL: App -> handleAddFood -> foods', foodsState);
         this.handleState(this.state.foodsState, this.state.foodsFilter);
       }
     );
@@ -50,9 +50,7 @@ class App extends Component {
   handleSearchName = event => {
     const { foodsState } = this.state;
     const filterItems = foodsState.filter(
-      element =>
-        element.name.toLowerCase().indexOf(event.target.value.toLowerCase()) !==
-        -1
+      element => element.name.toLowerCase().indexOf(event.target.value.toLowerCase()) !== -1
     );
 
     this.setState(
@@ -60,10 +58,7 @@ class App extends Component {
         foodsFilter: filterItems,
       },
       () => {
-        console.log(
-          "TCL: App -> handleAddFood -> foodsFilter",
-          this.state.foodsFilter
-        );
+        console.log('TCL: App -> handleAddFood -> foodsFilter', this.state.foodsFilter);
       }
     );
   };
@@ -100,10 +95,7 @@ class App extends Component {
   render() {
     const { foodsState, form, selectFoods, totalCalories } = this.state;
 
-    const foodsFilter = this.handleState(
-      this.state.foodsState,
-      this.state.foodsFilter
-    );
+    const foodsFilter = this.handleState(this.state.foodsState, this.state.foodsFilter);
 
     return (
       <div className="wrapper">
