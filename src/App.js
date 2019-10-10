@@ -49,11 +49,9 @@ class App extends Component {
 
   /*ITERATION 5 FUNCTION*/
   addFoodToList = food => {
-    this.state.foods.push(food);
     this.setState({
       todaysFoodList: [...this.state.todaysFoodList, food],
     });
-    console.log('iteration 5');
   };
 
   render() {
@@ -74,11 +72,13 @@ class App extends Component {
               name={food.name}
               image={food.image}
               calories={food.calories}
+              food={food}
+              addToList={this.addFoodToList}
             />
           );
         })}
         <div className="food-list"></div>
-        <TodaysFoodList todaysFoodList={this.addFoodToList} />
+        <TodaysFoodList todaysFoodList={this.state.todaysFoodList} />
       </div>
     );
   }
