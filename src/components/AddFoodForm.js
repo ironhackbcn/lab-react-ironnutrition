@@ -16,6 +16,7 @@ class AddFoodForm extends Component {
   handleInput(event) {
     const { value, name } = event.target;
     this.setState({
+      //entre corchetes me pasa el valor dinámicamente
       [name]: value
     });
     console.log(this.state);

@@ -4,7 +4,7 @@ import { foods } from "./data/foods.json";
 import FoodBox from "./components/FoodBox";
 import ButtonAdd from "./components/ButtonAdd";
 import AddFoodForm from "./components/AddFoodForm";
-import Search from "./components/Search";
+import MyNutritionTable from "./components/MyNutritionTable";
 
 class App extends Component {
   constructor() {
@@ -12,11 +12,19 @@ class App extends Component {
     this.state = {
       foodList: foods,
       showForm: false,
-      submitted: null
+      submitted: null,
+      query: "",
+      myNutritionList: [],
+      myNutrition: {
+        quantity: 0,
+        name: "",
+        calories: 0
+      }
     };
     this.handleAddFood = this.handleAddFood.bind(this);
     this.displayForm = this.displayForm.bind(this);
-    this.handleSearchResults = this.handleSearchResults.bind(this);
+    this.handleSearch = this.handleSearch.bind(this);
+    this.handleCalculator = this.handleCalculator.bind(this);
   }
   displayForm = () => {
     const { showForm } = this.state;
@@ -42,37 +50,80 @@ class App extends Component {
       });
     }
   }
-  handleSearchResults(query) {
-    console.log(query);
-    const search = query.name;
-    const { foodList } = this.state;
-    const foodlistCopy = [...foodList];
-    //working on filtered function
-    // const filteredList = foodlistCopy.filter(food => return );
-    // console.log(filteredList);
+  handleSearch(event) {
+    const { value } = event.target;
+    this.setState({
+      query: value
+    });
+  }
+  handleCalculator(food) {
+    const { quantity, name, calories } = food;
+    const { myNutritionList } = this.state;
+    this.setState({
+      myNutritionList: [food, ...myNutritionList],
+      myNutrition: {
+        quantity: quantity,
+        name: name,
+        calories: calories
+      }
+    });
   }
   render() {
-    const { foodList, showForm, submitted } = this.state;
-    const foods = foodList.map((ingredient, index) => {
-      return <FoodBox key={index} {...ingredient} />;
+    const {
+      foodList,
+      showForm,
+      submitted,
+      query,
+      myNutritionList,
+      myNutrition
+    } = this.state;
+    const foodFiltered = foodList.filter(food => {
+      return food.name.toLowerCase().includes(query.toLowerCase());
+    });
+    //hay que aplicar el filter aquí para que vaya dando los resultados conforme se escribe no en el estado
+    const foods = foodFiltered.map((ingredient, index) => {
+      return (
+        <FoodBox
+          key={index}
+          {...ingredient}
+          onCalculator={this.handleCalculator}
+        />
+      );
     });
     return (
       <div className="App container">
         <h1>Ironnutrition</h1>
-        <Search onSearch={this.handleSearchResults} />
+        <input
+          className="input column is-full"
+          type="text"
+          name="query"
+          placeholder="Search a food"
+          onChange={this.handleSearch}
+        />
         {(showForm && submitted === null) || (showForm && !submitted) ? (
           <AddFoodForm
             onAddFood={this.handleAddFood}
             {...foodList}
-            onSubmitted={this.handleSubmit}
+            onSubmitted={this.handleSearch}
           />
         ) : (
           <>
-            <p className="claim">Don't you find and ingredient here?</p>
+            <p className="claim">Don't you find an ingredient here?</p>
             <ButtonAdd action={this.displayForm} />
           </>
         )}
-        {foods}
+        <div className="columns">
+          <div className="column is-three-fifths">{foods}</div>
+          <div className="column my-nutrition">
+            <h2>Today's foods</h2>
+            <MyNutritionTable
+              quantity={myNutrition.quantity}
+              name={myNutrition.name}
+              calories={myNutrition.calories}
+              myNutrition={myNutritionList}
+            />
+          </div>
+        </div>
       </div>
     );
   }

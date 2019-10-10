@@ -4,22 +4,29 @@ class FoodBox extends Component {
   constructor(props) {
     super();
     this.state = {
-      quantity: props.quantity
+      quantity: 0,
+      name: "",
+      calories: ""
     };
     this.handleQuantity = this.handleQuantity.bind(this);
+    this.handleCalculator = this.handleCalculator.bind(this);
   }
 
-  //dato que pasa al padre, ingredient and quantity
-
   handleQuantity(event) {
-    console.log(event.target.value);
+    const name = this.props.name;
+    const calories = this.props.calories;
     this.setState({
-      quantity: event.target.value
+      quantity: parseInt(event.target.value),
+      name: name,
+      calories: calories
     });
   }
 
+  handleCalculator() {
+    this.props.onCalculator(this.state);
+  }
+
   render() {
-    const { quantity } = this.state;
     return (
       <div className="box">
         <article className="media">
@@ -42,12 +49,17 @@ class FoodBox extends Component {
                 <input
                   className="input"
                   type="number"
-                  value={quantity}
+                  value={this.state.quantity}
                   onChange={this.handleQuantity}
                 />
               </div>
               <div className="control">
-                <button className="button is-info">+</button>
+                <button
+                  className="button is-info"
+                  onClick={this.handleCalculator}
+                >
+                  +
+                </button>
               </div>
             </div>
           </div>

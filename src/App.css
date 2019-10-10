@@ -12,6 +12,12 @@ h1 {
   margin-bottom: 1em;
 }
 
+h2 {
+  font-size: 1.6em;
+  font-weight: 500;
+  margin-bottom: 12px;
+}
+
 /**Container**/
 .container {
   max-width: 900px;
@@ -36,4 +42,11 @@ h1 {
 }
 .claim {
   margin-top: 2em;
+}
+
+/*My nutrition table*/
+.nutrition-containter ul {
+  margin-left: 1.2em;
+  list-style: disc;
+  margin-bottom: 1.5em;
 }
