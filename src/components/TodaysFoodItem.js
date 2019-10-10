@@ -6,9 +6,15 @@ export default class TodaysFoodItem extends Component {
     return (
       <li>
         <div>
-          {quantity} {name} = {calories} cal
+          {quantity} {name} = {calories} cal 
+          <button
+            onClick={() => {
+              this.props.delete(this.props.index);
+            }}
+          >
+            X
+          </button>
         </div>
-        <div></div>
       </li>
     );
   }

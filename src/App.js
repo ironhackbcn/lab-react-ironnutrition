@@ -54,6 +54,13 @@ class App extends Component {
     });
   };
 
+  /*ITERATION 7 FUNCTION*/
+  removeFoodItem = foodIndex => {
+    this.state.todaysFoodList.splice(foodIndex, 1);
+    this.setState({
+      todaysFoodList: this.state.todaysFoodList,
+    });
+  };
   render() {
     return (
       <div>
@@ -78,7 +85,10 @@ class App extends Component {
           );
         })}
         <div className="food-list"></div>
-        <TodaysFoodList todaysFoodList={this.state.todaysFoodList} />
+        <TodaysFoodList
+          todaysFoodList={this.state.todaysFoodList}
+          removeFoodItem={this.removeFoodItem}
+        />
       </div>
     );
   }

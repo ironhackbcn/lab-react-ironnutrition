@@ -15,6 +15,7 @@ export default class TodaysFoodList extends Component {
                 image={food.image}
                 calories={food.calories}
                 food={food}
+                delete={this.props.removeFoodItem}
               />
             );
           })}
