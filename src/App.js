@@ -1,25 +1,31 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import FoodBox from './components/FoodBox';
+import foods from './data/foods.json';
+// import SearchBar from './components/SearchBar';
+// import AddFood from './components/AddFood';
+import TodayFood from './components/TodayFood';
 
 class App extends Component {
+  state = {
+    foods
+  };
+
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        <div className="container">
+          <div className="columns">
+            {/* <SearchBar /> */}
+            <div class="column">
+              {this.state.foods.map((food, index) => {
+                return <FoodBox key={index} {...food} />;
+              })}
+            </div>
+            ;{/* <AddFood /> */}
+            <TodayFood />
+          </div>
+        </div>
       </div>
     );
   }
