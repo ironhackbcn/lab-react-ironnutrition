@@ -59,3 +59,16 @@ code {
 ul {
   margin-bottom: 10px;
 }
+
+#search-bar {
+  border: 1px solid lightblue;
+  width: 80%;
+  height: 30px;
+  border-radius: 10px;
+  text-align: none;
+}
+
+.title {
+  font-size: 2em;
+  margin-top: 20px;
+}
