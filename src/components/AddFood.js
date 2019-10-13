@@ -1,22 +1,31 @@
 import React, { Component } from "react";
 
-class AddFood extends React.Component {
+class AddFood extends Component {
   constructor(props) {
     super(props);
-    this.state = { value: "" };
-
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.state = { name: "", calories: 0, image: "", quantity: 1 };
   }
 
-  handleChange(event) {
-    this.setState({ value: event.target.value });
-  }
+  handleChange = event => {
+    this.setState(
+      {
+        [event.target.name]:
+          event.target.type === "number"
+            ? parseInt(event.target.value)
+            : event.target.value
+      },
+      () => console.log(this.state)
+    );
+  };
 
-  handleSubmit(event) {
-    alert("A name was submitted: " + this.state.value);
+  handleSubmit = event => {
     event.preventDefault();
-  }
+    const { newFood, visibility } = this.props;
+    newFood(this.state);
+    this.setState({ name: "", calories: 0, image: "", quantity: 1 }, () =>
+      visibility()
+    );
+  };
 
   render() {
     return (
@@ -26,21 +35,21 @@ class AddFood extends React.Component {
         <input
           type="text"
           name="name"
-          value={this.state.value}
+          value={this.state.name}
           onChange={this.handleChange}
         />
         <label>Calories:</label>
         <input
           type="number"
           name="calories"
-          value={this.state.value}
+          value={this.state.calories}
           onChange={this.handleChange}
         />
         <label>Image:</label>
         <input
           type="text"
           name="image"
-          value={this.state.value}
+          value={this.state.image}
           onChange={this.handleChange}
         />
         <input type="submit" value="Add" />
