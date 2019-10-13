@@ -1,40 +1,42 @@
 import React, { Component } from "react";
-import { numberFormat } from "../helpers/numberFormat";
 
 class MyNutritionTable extends Component {
   constructor(props) {
-    super();
+    super(props);
     this.state = {
-      food: "",
-      calories: "",
-      quantity: "",
-      total: ""
+      quantity: 0
     };
   }
   render() {
-    // const myNutritionRepeat = this.props.myNutrition.filter(food => {
-    //   return (
-    //     this.props.myNutrition.includes(food.name) && console.log("repetido")
-    //   );
-    // });
-    const myNutrition = this.props.myNutrition.map((food, index) => {
-      return (
-        <li key={index}>
-          {food.quantity} {food.name}
-          {" = "}
-          {food.calories * food.quantity}cal
-        </li>
+    const myNutritionList = this.props.myNutrition;
+    const calculator =
+      myNutritionList.length > 0 ? (
+        myNutritionList.reverse().map((food, index) => {
+          return (
+            <li key={index}>
+              {food.quantity} {food.name} ={" "}
+              {food.quantity > 1
+                ? food.quantity * food.calories
+                : food.calories}
+              cal
+            </li>
+          );
+        })
+      ) : (
+        <p>No items</p>
       );
+    let calories = 0;
+    const total = myNutritionList.forEach(food => {
+      calories +=
+        food.quantity > 1 ? food.calories * food.quantity : food.calories;
     });
-    let sumCalories = 0;
-    const myNutritionTotal = this.props.myNutrition.map((food, index) => {
-      return (sumCalories += this.props.calories * this.props.quantity);
-    });
-    console.log(this.props.myNutrition);
+    console.log(total);
     return (
       <div className="nutrition-containter">
-        <ul>{myNutrition}</ul>
-        <p>Total: {numberFormat(myNutritionTotal)}cal</p>
+        <ul>{calculator}</ul>
+        <p>
+          Total: {calories.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} cal
+        </p>
       </div>
     );
   }

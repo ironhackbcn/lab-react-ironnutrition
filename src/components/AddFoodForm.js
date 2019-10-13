@@ -1,35 +1,24 @@
 import React, { Component } from "react";
 
-class AddFoodForm extends Component {
-  constructor(props) {
-    super();
-    this.state = {
-      name: "",
-      calories: "",
-      image: "",
-      quantity: "0"
-    };
-    this.handleInput = this.handleInput.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
-  handleInput(event) {
+class FoodForm extends Component {
+  state = {
+    name: "",
+    calories: 0,
+    image: "",
+    quantity: 1
+  };
+  handleInput = event => {
     const { value, name } = event.target;
     this.setState({
       //entre corchetes me pasa el valor dinámicamente
       [name]: value
     });
-    console.log(this.state);
-  }
-
-  handleSubmit(event) {
+  };
+  handleSubmit = event => {
     event.preventDefault();
-    this.props.onAddFood(this.state);
-    console.log("sending data");
-  }
-
+    this.props.onSubmitFood(this.state);
+  };
   render() {
-    // const { name, calories } = this.state;
     return (
       <form className="add-food" onSubmit={this.handleSubmit}>
         <div className="field">
@@ -50,6 +39,7 @@ class AddFoodForm extends Component {
             <input
               className="input"
               type="number"
+              min="0"
               name="calories"
               onChange={this.handleInput}
               placeholder="0"
@@ -70,7 +60,7 @@ class AddFoodForm extends Component {
                 <span className="file-cta">
                   <span className="file-label">Upload an image</span>
                 </span>
-                <span className="file-name">bananas.jpg</span>
+                <span className="file-name">food.jpg</span>
               </label>
             </div>
           </div>
@@ -87,4 +77,4 @@ class AddFoodForm extends Component {
   }
 }
 
-export default AddFoodForm;
+export default FoodForm;

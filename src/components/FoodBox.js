@@ -1,45 +1,45 @@
 import React, { Component } from "react";
 
-class FoodBox extends Component {
+class Foodbox extends Component {
   constructor(props) {
-    super();
+    super(props);
     this.state = {
-      quantity: 0,
-      name: "",
-      calories: ""
+      name: this.props.name,
+      quantity: 1,
+      calories: this.props.calories,
+      id: this.props.id
     };
     this.handleQuantity = this.handleQuantity.bind(this);
-    this.handleCalculator = this.handleCalculator.bind(this);
+    this.handleAdd = this.handleAdd.bind(this);
   }
-
   handleQuantity(event) {
-    const name = this.props.name;
-    const calories = this.props.calories;
     this.setState({
       quantity: parseInt(event.target.value),
-      name: name,
-      calories: calories
+      name: this.props.name,
+      calories: this.props.calories
     });
   }
-
-  handleCalculator() {
+  handleAdd(event) {
     this.props.onCalculator(this.state);
+    this.setState({
+      quantity: 1
+    });
   }
-
   render() {
+    const { name, calories, image } = this.props;
     return (
       <div className="box">
         <article className="media">
           <div className="media-left">
             <figure className="image is-64x64">
-              <img src={this.props.image} alt="" />
+              <img src={image} alt={name} />
             </figure>
           </div>
           <div className="media-content">
             <div className="content">
               <p>
-                <strong>{this.props.name}</strong> <br />
-                <small>{this.props.calories} cal</small>
+                <strong>{name}</strong> <br />
+                <small>{calories} cal</small>
               </p>
             </div>
           </div>
@@ -51,13 +51,11 @@ class FoodBox extends Component {
                   type="number"
                   value={this.state.quantity}
                   onChange={this.handleQuantity}
+                  min="0"
                 />
               </div>
               <div className="control">
-                <button
-                  className="button is-info"
-                  onClick={this.handleCalculator}
-                >
+                <button className="button is-info" onClick={this.handleAdd}>
                   +
                 </button>
               </div>
@@ -69,4 +67,4 @@ class FoodBox extends Component {
   }
 }
 
-export default FoodBox;
+export default Foodbox;
