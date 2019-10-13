@@ -1,0 +1,9 @@
+.add-food-form input {
+  font-size: 15px;
+  width: 100%;
+  margin: 5px 0 5px 20px;
+}
+
+.add-food-form label {
+  margin-left: 20px;
+}
