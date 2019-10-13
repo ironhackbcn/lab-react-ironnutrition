@@ -26,7 +26,7 @@ class Foodbox extends Component {
     });
   }
   render() {
-    const { name, calories, image } = this.props;
+    const { name, calories, image, clickToDelete } = this.props;
     return (
       <div className="box">
         <article className="media">
@@ -59,6 +59,14 @@ class Foodbox extends Component {
                   +
                 </button>
               </div>
+            </div>
+            <div className="field right">
+              <button
+                className="button is-small is-danger is-outlined"
+                onClick={clickToDelete}
+              >
+                Remove
+              </button>
             </div>
           </div>
         </article>

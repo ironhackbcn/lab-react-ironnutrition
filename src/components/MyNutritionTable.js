@@ -30,7 +30,6 @@ class MyNutritionTable extends Component {
       calories +=
         food.quantity > 1 ? food.calories * food.quantity : food.calories;
     });
-    console.log(total);
     return (
       <div className="nutrition-containter">
         <ul>{calculator}</ul>

@@ -66,6 +66,15 @@ class App extends Component {
       query: value
     });
   };
+  handleDelete = foodIndex => {
+    const { foods } = this.state;
+    console.log(foods);
+    const foodsCopy = [...foods];
+    foodsCopy.splice(foodIndex, 1);
+    this.setState({
+      foods: foodsCopy
+    });
+  };
   render() {
     const { foods, query, myNutritionList } = this.state;
     const foodFiltered = foods.filter(food => {
@@ -80,6 +89,7 @@ class App extends Component {
           image={ingredient.image}
           onCalculator={this.handleAdd}
           id={index}
+          clickToDelete={() => this.handleDelete(index)}
         />
       );
     });
