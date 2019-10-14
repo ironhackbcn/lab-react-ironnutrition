@@ -1,129 +1,112 @@
 import React, { Component } from "react";
 import "./App.css";
+import ShowFood from "./components/ShowFood";
 import foods from "./data/foods.json";
-import FindFood from "./components/FindFood";
-import SearchedFood from "./components/SearchedFood";
-import AddFood from "./components/DynamicList/AddFood";
+import AddFood from "./components/AddFood";
 import TodayFood from "./components/TodayFood";
 
 class App extends Component {
   state = {
-    allFood: [...foods],
-    searchedFood: [...foods],
-    todayFood: [],
-    form: "",
-    visible: true,
-    visibleSearchNFindFood: true
+    textFiltered: "",
+    showFood: [...foods],
+    visualizeAddFood: false,
+    buttonState: "Show",
+    todayFood: []
   };
 
-  handleDeleteFood = index => {
-    const { allFood, todayFood } = this.state;
-    const name = allFood[index].name;
-    allFood.splice(index, 1);
-    this.setState({ allFood: [...allFood], searchedFood: [...allFood] });
-    todayFood.splice(
-      todayFood
-        .map(tfood => {
-          return tfood.name;
-        })
-        .indexOf(name),
-      1
-    );
+  handleAddFood = (name, calories, image) => {
+    console.log(name, calories, image);
+    foods.push({ name, calories, image, quantity: 0 });
+    this.setState({ showFood: [...foods] });
   };
 
-  handleHideShowFood = () => {
-    const { visible } = this.state;
-    this.setState({ visible: !visible });
-  };
-
-  handleOnOffvisibleSearchNFindFood = () => {
-    const { visibleSearchNFindFood } = this.state;
-    this.setState({ visibleSearchNFindFood: !visibleSearchNFindFood });
-  };
-
-  handleSearch = value => {
-    const { allFood } = this.state;
-    if (value === "") {
-      this.setState({ searchedFood: [...allFood] });
-      this.setState({ form: "" });
-    } else {
-      const newState = [...allFood].filter(food => {
-        return food.name.toLowerCase().indexOf(value.toLowerCase()) !== -1; //avoid the return position -1 not matches
+  handleAddFoodToday = (name, calories, image, quantity) => {
+    console.log(name);
+    const { todayFood } = this.state;
+    if (todayFood.length > 0) {
+      console.log("el array no es nuevo");
+      const pos = todayFood.findIndex(food => {
+        console.log(food.name);
+        return food.name === name;
       });
-      this.setState({ searchedFood: [...newState] });
-      this.setState({ form: value });
-    }
-  };
-
-  handleAddFood = food => {
-    const allFoodCopy = [...this.state.allFood];
-    allFoodCopy.push(food);
-    this.setState({ allFood: [...allFoodCopy] });
-  };
-
-  handleAddFoodToday = food => {
-    let { todayFood } = this.state;
-    const pos = todayFood
-      .map(tfood => {
-        return tfood.name;
-      })
-      .indexOf(food.name);
-    if (pos >= 0) {
-      todayFood[pos].quantity += parseInt(food.quantity);
-      this.setState({ todayFood: [...todayFood] });
+      console.log(pos);
+      if (pos >= 0) {
+        console.log("He encontrado un alimento igual");
+        const newState = [...todayFood];
+        newState[pos].quantity += quantity;
+        this.setState({ todayFood: [...newState] }, () => {
+          console.log(this.state);
+        });
+      } else {
+        console.log("No he encontrado un alimento igual");
+        const newState = { name, calories, image, quantity };
+        this.setState({ todayFood: [...todayFood, newState] });
+      }
     } else {
-      const newFood = {
-        name: food.name,
-        quantity: parseInt(food.quantity),
-        calories: food.calories
+      console.log("el array es nuevo");
+      const newState = {
+        name,
+        calories,
+        image,
+        quantity
       };
-      this.setState({ todayFood: [newFood, ...todayFood] });
+      console.log(newState);
+      this.setState({ todayFood: [...todayFood, newState] }, () => {
+        console.log(this.state.todayFood);
+      });
     }
+  };
+
+  handleDeleteFoodToday = index => {
+    const newState = [...this.state.showFood];
+    newState.splice(index, 1);
+    this.setState({ showFood: [...newState] });
+  };
+
+  handleShowAddFood = () => {
+    const { buttonState } = this.state;
+    this.setState({ visualizeAddFood: !this.state.visualizeAddFood });
+    if (buttonState === "Show") {
+      this.setState({ buttonState: "Hide" });
+    } else {
+      this.setState({ buttonState: "Show" });
+    }
+  };
+
+  handleChange = e => {
+    let food = [...foods];
+    const { name, value } = e.target;
+    const { showFood } = this.state;
+    if (value !== "") {
+      food = showFood.filter(aFood => {
+        return aFood.name.toLowerCase().indexOf(value.toLowerCase()) !== -1;
+      });
+    } 
+      this.setState({ [name]: value, showFood: food });
+    
   };
 
   render() {
-    const { form, searchedFood, visible, visibleSearchNFindFood } = this.state;
-
+    const { showFood, visualizeAddFood, todayFood } = this.state;
     return (
-      <div className="App">
-        <header className="App-header">
-          <h1 className="App-h1">IronNutrition</h1>
-          {/*This is form and button component */}
-          {visible ? (
-            <div className="all-food">
-              <AddFood
-                OnOffvisibleSearchNFindFood={
-                  this.handleOnOffvisibleSearchNFindFood
-                }
-                onoffShowAll={this.handleHideShowFood}
-                handleAddFood={this.handleAddFood}
-              />
-              {/* This is a Search Food Bar*/}
+      <div>
+        <h1>IronNutrition</h1>
 
-              {visibleSearchNFindFood ? (
-                <div>
-                  <div className="search-bar">
-                    <FindFood myFunction={this.handleSearch} valueForm={form} />
-                  </div>
+        {/* {/* AddFood */}
+        {visualizeAddFood && <AddFood myFunction={this.handleAddFood} />}
+        <button onClick={this.handleShowAddFood}>
+          {this.state.buttonState}
+        </button>
+        <label htmlFor="textFilter">Search</label>
+        {/* Show Food */}
+        <input type="text" onChange={this.handleChange} />
+        <ShowFood
+          showFood={showFood}
+          addFoodToday={this.handleAddFoodToday}
+          deleteFood={this.handleDeleteFoodToday}
+        />
 
-                  <div className="listfood">
-                    <div className="findfood-searched">
-                      {/*This is a Searched Food Map */}
-                      <SearchedFood
-                        sfood={searchedFood}
-                        AddFoodToday={this.handleAddFoodToday}
-                        DeleteFood={this.handleDeleteFood}
-                      />
-                    </div>
-                    <div className="todayfood">
-                      <TodayFood todayFood={this.state.todayFood} />
-                    </div>
-                  </div>
-                </div>
-              ) : null}
-            </div>
-          ) : null}
-        </header>
+        <TodayFood todayFood={todayFood} />
       </div>
     );
   }

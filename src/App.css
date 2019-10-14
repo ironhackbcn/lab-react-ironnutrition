@@ -1,11 +1,13 @@
 body {
   max-width: 900px;
   padding: 10px;
+  
 }
 .App {
   text-align: center;
   max-width: 900px;
   margin-top: 30px;
+  font-size:16px;
 }
 
 .App-logo {
@@ -87,7 +89,7 @@ label {
 .findfood-searched {
   display: flex;
   flex-direction: column;
-  justify-content: start;
+  justify-content: flex-start;
   width: 60%;
 }
 .todayfood {

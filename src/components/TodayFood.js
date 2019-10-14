@@ -11,9 +11,7 @@ class TodayFood extends Component {
           {todayFood.map((food, index) => {
             return (
               <li style={{ listStyle: "inside" }} key={`${food.name}-${index}`}>
-                {" "}
-                {food.quantity} x {food.name} ={" "}
-                {parseInt(food.quantity) * food.calories} cal.{" "}
+                {`${food.quantity} x ${food.name} = ${parseInt(food.quantity) * food.calories} cal.`}
               </li>
             );
           })}
