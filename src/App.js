@@ -15,52 +15,38 @@ class App extends Component {
   };
 
   handleAddFood = (name, calories, image) => {
-    console.log(name, calories, image);
     foods.push({ name, calories, image, quantity: 0 });
     this.setState({ showFood: [...foods] });
   };
 
   handleAddFoodToday = (name, calories, image, quantity) => {
-    console.log(name);
     const { todayFood } = this.state;
     if (todayFood.length > 0) {
-      console.log("el array no es nuevo");
       const pos = todayFood.findIndex(food => {
-        console.log(food.name);
         return food.name === name;
       });
-      console.log(pos);
       if (pos >= 0) {
-        console.log("He encontrado un alimento igual");
         const newState = [...todayFood];
         newState[pos].quantity += quantity;
-        this.setState({ todayFood: [...newState] }, () => {
-          console.log(this.state);
-        });
+        this.setState({ todayFood: [...newState] }, () => {});
       } else {
-        console.log("No he encontrado un alimento igual");
         const newState = { name, calories, image, quantity };
         this.setState({ todayFood: [...todayFood, newState] });
       }
     } else {
-      console.log("el array es nuevo");
       const newState = {
         name,
         calories,
         image,
         quantity
       };
-      console.log(newState);
-      this.setState({ todayFood: [...todayFood, newState] }, () => {
-        console.log(this.state.todayFood);
-      });
+      this.setState({ todayFood: [...todayFood, newState] }, () => {});
     }
   };
 
   handleDeleteFoodToday = index => {
-    const newState = [...this.state.showFood];
-    newState.splice(index, 1);
-    this.setState({ showFood: [...newState] });
+    foods.splice(index, 1);
+    this.setState({ showFood: [...foods] });
   };
 
   handleShowAddFood = () => {
@@ -81,9 +67,8 @@ class App extends Component {
       food = showFood.filter(aFood => {
         return aFood.name.toLowerCase().indexOf(value.toLowerCase()) !== -1;
       });
-    } 
-      this.setState({ [name]: value, showFood: food });
-    
+    }
+    this.setState({ [name]: value, showFood: food });
   };
 
   render() {
@@ -94,19 +79,37 @@ class App extends Component {
 
         {/* {/* AddFood */}
         {visualizeAddFood && <AddFood myFunction={this.handleAddFood} />}
-        <button onClick={this.handleShowAddFood}>
-          {this.state.buttonState}
-        </button>
-        <label htmlFor="textFilter">Search</label>
+        <div>
+          <button
+            className="button is-primary"
+            onClick={this.handleShowAddFood}
+            style={{ margin: "10px" }}
+          >
+            {this.state.buttonState}
+          </button>
+        </div>
         {/* Show Food */}
-        <input type="text" onChange={this.handleChange} />
-        <ShowFood
-          showFood={showFood}
-          addFoodToday={this.handleAddFoodToday}
-          deleteFood={this.handleDeleteFoodToday}
-        />
+        <div className="control">
+          <label htmlFor="textFilter">Search</label>
+          <input
+            className="input is-small"
+            type="text"
+            onChange={this.handleChange}
+          />
+        </div>
+        <div className="columns">
+          <div className="Card">
+            <ShowFood
+              showFood={showFood}
+              addFoodToday={this.handleAddFoodToday}
+              deleteFood={this.handleDeleteFoodToday}
+            />
+          </div>
 
-        <TodayFood todayFood={todayFood} />
+          <div className="column todayFood">
+            <TodayFood todayFood={todayFood} />
+          </div>
+        </div>
       </div>
     );
   }

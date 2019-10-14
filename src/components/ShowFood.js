@@ -3,7 +3,7 @@ import Card from "./Card";
 
 class ShowFood extends Component {
   render() {
-    const { showFood, addFoodToday,deleteFood} = this.props;
+    const { showFood, addFoodToday, deleteFood } = this.props;
     return (
       <div>
         {showFood.map((aFood, index) => {
@@ -16,7 +16,6 @@ class ShowFood extends Component {
                 aFood={aFood}
                 index={index}
               />
-              ;
             </div>
           );
         })}

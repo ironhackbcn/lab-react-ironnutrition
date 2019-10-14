@@ -28,7 +28,7 @@ export default class componentName extends Component {
   render() {
     const { aFood, index } = this.props;
     return (
-      <div className="box">
+      <div className="box card">
         <article className="media">
           <div className="media-left">
             <figure className="image is-64x64">
@@ -37,17 +37,18 @@ export default class componentName extends Component {
           </div>
           <div className="media-content">
             <div className="content">
-              <p>
-                <strong>{aFood.name}</strong> <br />
-                <small>{aFood.calories}</small>
-              </p>
+              <span>
+                <strong>{aFood.name}</strong> {"  "}
+                <small>{aFood.calories} cal.</small>
+              </span>
             </div>
           </div>
           <div className="media-right">
             <div className="field has-addons">
               <div className="control">
                 <input
-                  className="input"
+                  style={{ paddingRight: "0px" }}
+                  className="input is-small"
                   type="number"
                   name="quantity"
                   onChange={this.handleChange}
@@ -55,7 +56,7 @@ export default class componentName extends Component {
               </div>
               <div className="control">
                 <button
-                  className="button is-info"
+                  className="button is-info is-small"
                   onClick={() => {
                     this.handleQty(aFood.name, aFood.calories, aFood.image);
                   }}
@@ -63,14 +64,9 @@ export default class componentName extends Component {
                   +
                 </button>
                 <button
-                  className="button is-info"
+                  className="button is-danger is-small"
                   onClick={() => {
                     this.handleDeleteFoodToday(index);
-                  }}
-                  style={{
-                    borderRadius: "100%",
-                    fontSize: "5px",
-                    backgroundColor: "tomato"
                   }}
                 >
                   X

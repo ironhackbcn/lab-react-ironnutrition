@@ -4,7 +4,7 @@ class AddFood extends Component {
   state = {
     name: "",
     calories: "",
-    image: ""
+    image: "/images/default.jpg"
   };
 
   handleAddFood = e => {
@@ -23,23 +23,43 @@ class AddFood extends Component {
 
   render() {
     return (
-      <div>
-        <label htmlFor="name">Name</label>
-        <input type="text" name="name" onChange={this.handleAddFood}></input>
-        <label>Calories</label>
-        <input
-          type="text"
-          name="calories"
-          onChange={this.handleAddFood}
-        ></input>
-        <label>Url Image</label>
-        <input type="text" name="image" onChange={this.handleAddFood}></input>
-        <img
-          src={this.state.image}
-          alt="whatever"
-          style={{ width: "64px" }}
-        ></img>
-        <button onClick={this.handleInf}>Add food</button>
+      <div className="control">
+        <div>
+          <label htmlFor="name">Name</label>
+          <input
+            className="input is-small"
+            type="text"
+            name="name"
+            onChange={this.handleAddFood}
+          ></input>
+        </div>
+        <div className="control">
+          <label>Calories</label>
+          <input
+            className="input is-small"
+            type="text"
+            name="calories"
+            onChange={this.handleAddFood}
+          ></input>
+        </div>
+        <div className="control">
+          <label>Url Image</label>
+          <input
+            className="input is-small"
+            type="text"
+            name="image"
+            onChange={this.handleAddFood}
+          ></input>
+          <img
+            className="image is-64x64"
+            src={this.state.image}
+            alt="whatever"
+            style={{ width: "64px" }}
+          ></img>
+        </div>
+        <button className="button is-success" onClick={this.handleInf}>
+          Add food
+        </button>
       </div>
     );
   }
