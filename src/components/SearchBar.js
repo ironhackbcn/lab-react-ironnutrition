@@ -10,13 +10,14 @@ class SearchBar extends Component {
     this.setState({ search: e.target.value.substr(0, 40) });
   };
 
-  filteredFood = () =>
+  filteredFood = () => {
+    console.log('y por aqui?');
     this.props.foods.filter(food => {
       return food.name.indexOf(this.state.search) !== -1;
     });
+  };
 
   render() {
-    // console.log(filteredFood);
     return (
       <div className="box">
         <input

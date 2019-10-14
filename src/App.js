@@ -18,6 +18,7 @@ class App extends Component {
   };
 
   filteredFood = food => {
+    console.log('food', food);
     this.setState({ foods: food });
   };
 
