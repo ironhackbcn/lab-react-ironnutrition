@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-// import logo from "./logo.svg";
 import "./App.css";
 import foods from "./data/foods.json";
 import Foodbox from "./components/FoodBox";
 import AddFood from "./components/AddFood";
+import Search from "./components/Search";
 
 class App extends Component {
   constructor() {
@@ -29,11 +29,21 @@ class App extends Component {
     });
   };
 
+  search = item => {
+    const foundFood = foods.filter(food => {
+      return food.name.toLowerCase().search(item) !== -1;
+    });
+    this.setState({
+      foods: [...foundFood]
+    });
+  };
+
   render() {
     // console.log(foods);
     const { foods, visibilityForm } = this.state;
     return (
       <div>
+        <Search search={this.search} />
         <button onClick={this.handleVisibilityForm}>new food</button>
         {visibilityForm && (
           <AddFood
