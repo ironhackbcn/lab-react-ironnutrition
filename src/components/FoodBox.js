@@ -13,23 +13,30 @@ class FoodBox extends Component {
     calories: '',
     image:'',
     totalCalories:0,
-    addFood : [] //aquí tengo que añadir los objetos addFood de FoodCard
-
+    addFood : [] 
   }
   
+  addIngredient = (event, newQuantity, name, calories) => {
+    //console.log(event,newQuantity, name, calories)
+    event.preventDefault();
+    const {addFood} = this.state
+    const newFood = {
+      name,
+      calories,
+      newQuantity
+    }
+    const addFoodCopy = [...addFood, newFood]
+    this.setState({
+      addFood:addFoodCopy
+    })
+  }
+
   changeFormStatus = (event) => {
     const {showForm} = this.state
     this.setState({
       showForm: !showForm,
     })
   }
-
-  // handleInputChange = (event) => {
-  //   const {name, value} = event.target
-  //   this.setState({
-  //     [name]: value
-  //   })
-  // }
   
   handleSearch = (event) => {
     const {value} = event.target;
@@ -58,24 +65,6 @@ class FoodBox extends Component {
     })
   }
 
-  // handleSubmit = (event) => {
-  //   event.preventDefault();
-  //   const {name,calories,image,foodsArr,showForm} = this.state;
-  //   const foodsCopy = [...foodsArr];
-  //   const newFood = {name, calories, image};
-  //   foodsCopy.push(newFood)
-
-  //   this.setState({
-  //     foodsArr:foodsCopy,
-  //     showFood:foodsCopy,
-  //     name: '',
-  //     calories: '',
-  //     image:'',
-  //     search:'',
-  //     showForm: !showForm,
-  //   })
-  // }
-
   render() {
     const {showForm, name, calories, image,search, showFood, addFood} = this.state
     return (
@@ -98,7 +87,7 @@ class FoodBox extends Component {
           <div className="box">
             {showFood.map( (food, index) => {
               return (
-                <FoodCard food={food} index={index} key={index} />
+                <FoodCard food={food} index={index} key={index} addIngredient={this.addIngredient} />
               )
             } 
             )}

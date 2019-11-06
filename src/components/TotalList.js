@@ -4,6 +4,7 @@ import FoodItem from './FoodItem.js';
 class TotalList extends Component {
   render() {
     const {food} = this.props
+    console.log(food)
     return (
       <div className="food-list">
         <h1>Today's foods</h1>

@@ -7,6 +7,7 @@ class FoodItem extends Component {
       <li key={index}>
         <p>{food.name}</p>
         <p>{food.calories}</p>
+        <p>{food.newQuantity}</p>
       </li>
     )
   }
