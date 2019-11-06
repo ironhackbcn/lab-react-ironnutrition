@@ -48,6 +48,31 @@ body{
 .food-list{
   width: 32%;
 }
+
+.food-list ul li{
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+}
+
+.food-list ul li:first-child{
+  font-weight: bold;
+}
+
+.food-list ul li p:nth-child(3) {
+  min-width: 60px;
+  text-align: right;
+}
+
+.food-list ul li p:nth-child(2) {
+  text-align: center;
+  min-width: 88px;
+}
+.food-list ul li p:first-child {
+  min-width: 100px;
+  text-align: left;
+}
+
 .search{
   margin-bottom: 20px;
 }

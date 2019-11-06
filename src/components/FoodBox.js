@@ -17,7 +17,6 @@ class FoodBox extends Component {
   }
   
   addIngredient = (event, newQuantity, name, calories) => {
-    //console.log(event,newQuantity, name, calories)
     event.preventDefault();
     const {addFood} = this.state
     const newFood = {
@@ -25,7 +24,22 @@ class FoodBox extends Component {
       calories,
       newQuantity
     }
-    const addFoodCopy = [...addFood, newFood]
+    const addFoodCopy = [...addFood]
+
+    const index = addFoodCopy.findIndex(food =>food.name === name)
+    if(index === -1){
+      if(newFood.newQuantity>0){
+        
+        addFoodCopy.push(newFood)
+
+      }
+    } else{
+      addFoodCopy[index].newQuantity = Number(addFoodCopy[index].newQuantity) + Number(newFood.newQuantity); 
+    }
+    if(index>=0 && addFoodCopy[index].newQuantity <= 0){
+      addFoodCopy.splice(index,1);
+    }
+
     this.setState({
       addFood:addFoodCopy
     })
@@ -42,7 +56,6 @@ class FoodBox extends Component {
     const {value} = event.target;
     const foodsFiltered = [...this.state.foodsArr];
     const results= foodsFiltered.filter(food=> food.name.toLowerCase().includes(value.toLowerCase()));
-    console.log(results);     
 
     this.setState({
       showFood:results,

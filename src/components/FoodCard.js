@@ -4,10 +4,7 @@ class FoodCard extends Component {
   state = {
     ingredients: '',
     newQuantity:1,
-    name:this.props.food.name,
-    calories:this.props.food.calories,
   }
-
 
   handleQuantity = (event) => {
     const {name, value} = event.target
@@ -18,7 +15,7 @@ class FoodCard extends Component {
   
   render() {
     const {index , food, addIngredient} = this.props;
-    const {newQuantity, name, calories} = this.state;
+    const {newQuantity} = this.state;
     return (
       <article className="media" key={index}>
         <div className="media-left">
@@ -46,7 +43,7 @@ class FoodCard extends Component {
               />
             </div>
             <div className="control">
-              <button onClick={(event)=>{addIngredient(event, newQuantity, name, calories)}} className="button is-info">
+              <button onClick={(event)=>{addIngredient(event, newQuantity, food.name, food.calories)}} className="button is-info">
                 +
               </button>
             </div>
