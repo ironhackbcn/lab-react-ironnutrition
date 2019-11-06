@@ -30,10 +30,10 @@ class Form extends Component {
   }
 
   render(){
-    const {name,calories,image} = this.props
+    const {changeFormStatus} = this.props
     return (
       
-      <form onSubmit={this.handleSubmit}>
+      <form onSubmit={this.handleSubmit} className="add-form">
         <label htmlFor="name">Name</label>
         <input 
           className="input"
@@ -67,6 +67,7 @@ class Form extends Component {
           onChange = {this.handleInputChange}
         />
         <button className="button is-info">+ Add</button>
+        <button className="button is-info" onClick={changeFormStatus}>Cancel</button>
       </form>
     )
   }

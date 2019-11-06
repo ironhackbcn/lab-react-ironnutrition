@@ -30,11 +30,28 @@ body{
   color: #61dafb;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+#root{
+  width: 100%;
+}
+
+.content{
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 0;
+}
+
+.box{
+  width: 65%;
+  margin-bottom: 0;
+}
+
+.food-list{
+  width: 32%;
+}
+.search{
+  margin-bottom: 20px;
+}
+
+.add-form button{
+  margin: 20px 10px;
 }

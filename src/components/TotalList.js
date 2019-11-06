@@ -5,12 +5,12 @@ class TotalList extends Component {
   render() {
     const {food} = this.props
     return (
-      <div className="list">
+      <div className="food-list">
         <h1>Today's foods</h1>
         <ul>
           {food.map( (food, index) => {
             return (
-              <FoodItem food={food} index={index} />
+              <FoodItem food={food} key={index} index={index} />
             )
           })} 
         </ul>

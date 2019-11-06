@@ -80,7 +80,7 @@ class FoodBox extends Component {
     const {showForm, name, calories, image,search, showFood, addFood} = this.state
     return (
       <>
-        <input className="input"
+        <input className="input search"
           type="text" 
           id="search" 
           name="search" 
@@ -89,20 +89,22 @@ class FoodBox extends Component {
           onChange = {this.handleSearch}
         />
         {showForm ? 
-        <Form  name={name} calories={calories} image={image} addNewFood={this.addNewFood} /> : null}
-        {!showForm ? 
+        <Form  name={name} calories={calories} image={image} addNewFood={this.addNewFood} changeFormStatus={this.changeFormStatus} /> : null}
+        {!showForm && 
         <button onClick={this.changeFormStatus} className="button is-info">Add new food</button> 
-        :<button className="button is-info" onClick={this.changeFormStatus}>Cancel</button>
         }
-        <div className="box">
-        {showFood.map( (food, index) => {
-          return (
-            <FoodCard food={food} index={index} />
-          )
-        } 
-        )}
-        </div> 
-        <TotalList food={addFood} />
+
+        <section className="content">
+          <div className="box">
+            {showFood.map( (food, index) => {
+              return (
+                <FoodCard food={food} index={index} key={index} />
+              )
+            } 
+            )}
+          </div> 
+          <TotalList food={addFood} />
+        </section>
       </>
     )
   }
