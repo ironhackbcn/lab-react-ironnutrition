@@ -5,13 +5,14 @@ class FoodCard extends Component {
     ingredients: '',
     newQuantity:1,
   }
-
+  
   handleQuantity = (event) => {
     const {name, value} = event.target
     this.setState({
       [name]: value
     })
   }
+  
   
   render() {
     const {index , food, addIngredient} = this.props;

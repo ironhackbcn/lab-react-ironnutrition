@@ -1,16 +1,14 @@
-import React, { Component } from 'react'
+import React from 'react'
 
-class FoodItem extends Component {
-  render() {
-    const {food, index} = this.props;
-    return (
-      <li key={index}>
-        <p>{food.name}</p>
-        <p>{food.calories}</p>
-        <p>{food.newQuantity}</p>
-      </li>
-    )
-  }
+const FoodItem = (props) => {
+  const {food, index} = props;
+  return (
+    <li key={index}>
+      <p>{food.name}</p>
+      <p>{food.calories}</p>
+      <p>{food.newQuantity}</p>
+    </li>
+  )
 }
 
 export default FoodItem;

@@ -5,13 +5,11 @@ import FoodCard from './FoodCard.js';
 import TotalList from './TotalList.js';
 
 class FoodBox extends Component {
+
   state = {
     showForm :false,
     foodsArr : foods,
     showFood: foods,
-    name: '',
-    calories: '',
-    image:'',
     totalCalories:0,
     addFood : [],
   }
@@ -62,7 +60,6 @@ class FoodBox extends Component {
     const {value} = event.target;
     const foodsFiltered = [...this.state.foodsArr];
     const results= foodsFiltered.filter(food=> food.name.toLowerCase().includes(value.toLowerCase()));
-
     this.setState({
       showFood:results,
     })
@@ -76,40 +73,30 @@ class FoodBox extends Component {
     this.setState({
       foodsArr:foodsCopy,
       showFood:foodsCopy,
-      name: '',
-      calories: '',
-      image:'',
-      search:'',
       showForm: !showForm,
     })
   }
 
   render() {
-    const {showForm, name, calories, image,search, showFood, addFood, totalCalories} = this.state
+    const {showForm, showFood, addFood, totalCalories} = this.state
     return (
       <>
-        <input className="input search"
-          type="text" 
-          id="search" 
-          name="search" 
-          placeholder="e.g. Salad" 
-          value={search}
-          onChange = {this.handleSearch}
-        />
-        {showForm ? 
-        <Form  name={name} calories={calories} image={image} addNewFood={this.addNewFood} changeFormStatus={this.changeFormStatus} /> : null}
+        <input className="input search" type="text" id="search" name="search" placeholder="e.g. Salad" onChange={this.handleSearch}/>
+
+        {showForm &&
+        <Form addNewFood={this.addNewFood} changeFormStatus={this.changeFormStatus} />}
         {!showForm && 
         <button onClick={this.changeFormStatus} className="button is-info">Add new food</button> 
         }
 
         <section className="content">
           <div className="box">
-            {showFood.map( (food, index) => {
+            {showFood.map((food, index) => {
               return (
                 <FoodCard food={food} index={index} key={index} addIngredient={this.addIngredient} />
               )
-            } 
-            )}
+              })
+            }
           </div> 
           <TotalList food={addFood} totalCalories={totalCalories} />
         </section>
