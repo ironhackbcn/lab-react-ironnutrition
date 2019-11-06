@@ -3,7 +3,7 @@ import FoodItem from './FoodItem.js';
 
 class TotalList extends Component {
   render() {
-    const {food} = this.props
+    const {food,totalCalories} = this.props
     return (
       <div className="food-list">
         <h1>Today's foods</h1>
@@ -19,6 +19,7 @@ class TotalList extends Component {
             )
           })} 
         </ul>
+        <p>Total calories: {totalCalories}</p>
       </div>
     )
   }

@@ -13,7 +13,7 @@ class FoodBox extends Component {
     calories: '',
     image:'',
     totalCalories:0,
-    addFood : [] 
+    addFood : [],
   }
   
   addIngredient = (event, newQuantity, name, calories) => {
@@ -40,8 +40,14 @@ class FoodBox extends Component {
       addFoodCopy.splice(index,1);
     }
 
+    const newTotalCalories = addFoodCopy.reduce((acc,current)=>{
+      return acc+(current.newQuantity*current.calories)
+    },0);
+
+
     this.setState({
-      addFood:addFoodCopy
+      addFood:addFoodCopy,
+      totalCalories: newTotalCalories
     })
   }
 
@@ -79,7 +85,7 @@ class FoodBox extends Component {
   }
 
   render() {
-    const {showForm, name, calories, image,search, showFood, addFood} = this.state
+    const {showForm, name, calories, image,search, showFood, addFood, totalCalories} = this.state
     return (
       <>
         <input className="input search"
@@ -105,7 +111,7 @@ class FoodBox extends Component {
             } 
             )}
           </div> 
-          <TotalList food={addFood} />
+          <TotalList food={addFood} totalCalories={totalCalories} />
         </section>
       </>
     )
