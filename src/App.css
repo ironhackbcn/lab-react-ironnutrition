@@ -1,5 +1,12 @@
+body{
+  display:  flex;
+  justify-content: center;
+  align-items: center;
+  
+}
 .App {
   text-align: center;
+  margin: 50px;
 }
 
 .App-logo {
@@ -23,11 +30,53 @@
   color: #61dafb;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+#root{
+  width: 100%;
+}
+
+.content{
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 0;
+}
+
+.box{
+  width: 65%;
+  margin-bottom: 0;
+}
+
+.food-list{
+  width: 32%;
+}
+
+.food-list ul li{
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+}
+
+.food-list ul li:first-child{
+  font-weight: bold;
+}
+
+.food-list ul li p:nth-child(3) {
+  min-width: 60px;
+  text-align: right;
+}
+
+.food-list ul li p:nth-child(2) {
+  text-align: center;
+  min-width: 88px;
+}
+.food-list ul li p:first-child {
+  min-width: 100px;
+  text-align: left;
+}
+
+.search{
+  margin-bottom: 20px;
+}
+
+.add-form button{
+  margin: 20px 10px;
 }
