@@ -1,25 +1,36 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import Foodbox from './components/Foodbox';
+import foods from './data/foods.json';
+import Button from './components/Button';
+import Search from './components/Search'
 import './App.css';
 
 class App extends Component {
+  state = {
+    foods,
+    originalFoods: foods,
+    name: '',
+    calories: '',
+    image: '',
+    isAddingNew: false,
+    quantity: []
+  }
+
+  changeFoods = (foods) => {
+    this.setState({foods})
+  }
+
+  showFood = (foods) => {
+    this.setState({foods})
+  }
+
+
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+      <Button />
+      <Search changeFoods={this.changeFoods} originalFoods={this.state.originalFoods}/>
+      <Foodbox foods={this.state.foods} showFood={this.showFood}/>
       </div>
     );
   }
